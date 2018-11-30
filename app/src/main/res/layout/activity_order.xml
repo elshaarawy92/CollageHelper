@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mvp.order.OrderActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/ll_select_goods">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:text="选择商品"
+                    android:textColor="#F000"
+                    android:textSize="20sp"
+                    android:layout_margin="15dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/next"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/ll_select_customer">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:text="选择客户"
+                    android:textColor="#F000"
+                    android:textSize="20sp"
+                    android:layout_margin="15dp"/>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/next"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ADADAD"></LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_item_goods"
+                android:layout_margin="20dp"
+                android:textColor="#ADADAD"
+                android:textSize="20sp">
+            </TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_itemm_customer"
+                android:layout_margin="20dp"
+                android:textColor="#E0E0E0"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_time"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text"
+            android:text="总金额"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#01B468"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_toRightOf="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_account_money"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#01B468"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textview"
+            android:layout_marginLeft="15dp"
+            android:id="@+id/tv_accounts_money"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:textColor="#F000"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_sure"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:background="#01B468"
+            android:text="确定"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
