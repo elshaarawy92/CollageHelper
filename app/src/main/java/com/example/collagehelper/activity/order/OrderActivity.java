@@ -1,23 +1,18 @@
-package com.example.collagehelper.mvp.order;
+package com.example.collagehelper.activity.order;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.bean.GoodsEvent;
-import com.example.collagehelper.mvp.goods.GoodsActivity;
-import com.example.collagehelper.mvp.selectcustomer.SelectCustomerActivity;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.example.collagehelper.activity.goods.GoodsActivity;
+import com.example.collagehelper.activity.selectcustomer.SelectCustomerActivity;
 
 import java.util.ArrayList;
 import java.util.List;

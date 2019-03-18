@@ -4,30 +4,33 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".mvp.main.MainActivity"
-            android:launchMode="singleTask">
+            android:name=".activity.main.MainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.customer.CustomerActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.order.OrderActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.goods.GoodsActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.selectcustomer.SelectCustomerActivity" />
+        <activity android:name=".activity.welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".mvp.customer.CustomerActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".mvp.order.OrderActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".mvp.goods.GoodsActivity"
-            android:launchMode="singleTask" />
-        <activity android:name=".mvp.selectcustomer.SelectCustomerActivity"></activity>
+        <activity android:name=".activity.login.view.LoginActivity" />
+        <activity android:name=".activity.regist.view.RegistActivity"></activity>
     </application>
 
 </manifest>

@@ -16,7 +16,7 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.adapter.DepthPageTransformer;
 import com.example.collagehelper.adapter.MyPager;
 import com.example.collagehelper.base.BaseFragment;
-import com.example.collagehelper.mvp.order.OrderActivity;
+import com.example.collagehelper.activity.order.OrderActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.collagehelper.R;
 import com.example.collagehelper.adapter.CustomerAdapter;
 import com.example.collagehelper.bean.Function;
-import com.example.collagehelper.mvp.customer.CustomerActivity;
+import com.example.collagehelper.activity.customer.CustomerActivity;
 
 import java.util.ArrayList;
 import java.util.List;

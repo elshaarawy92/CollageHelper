@@ -1,7 +1,12 @@
 package com.example.collagehelper.base;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +15,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -32,6 +40,31 @@ public class BaseActivity extends AppCompatActivity {
     private ImageButton ibRight;
     private TextView tittle;
     private FrameLayout fContent;
+    private static boolean isExit = false;
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isExit = false;
+        }
+    };
+
+    /**
+     * 点击两次退出程序
+     */
+    public void clickTwiceToExit(){
+        if (!isExit){
+            isExit = true;
+            Toast.makeText(this,"再点击一次退出程序",Toast.LENGTH_SHORT).show();
+            handler.sendMessageDelayed(Message.obtain(),2000);
+        }else {
+            Intent home = new Intent(Intent.ACTION_MAIN);
+            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            home.addCategory(Intent.CATEGORY_HOME);
+            startActivity(home);
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -142,6 +175,37 @@ public class BaseActivity extends AppCompatActivity {
                 .create(onSubscribe)
                 .throttleFirst(seconds,TimeUnit.SECONDS)
                 .subscribe(observer);
+    }
+
+    //将Bitmap转化成二进制
+    public byte[] getBitmapByte(Bitmap bitmap){
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        try {
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return out.toByteArray();
+    }
+
+    //将二进制转化成Bitmap
+    public Bitmap getBitmapFromByte(byte[] temp){
+        if(temp != null ){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(temp, 0, temp.length);
+            return bitmap;
+        }else{
+            return null;
+        }
+    }
+
+    public void hideLeftImage(){
+        ibLeft.setVisibility(View.GONE);
+    }
+
+    public void hideRightImage(){
+        ibRight.setVisibility(View.GONE);
     }
 
 }

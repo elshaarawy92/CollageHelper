@@ -1,13 +1,11 @@
-package com.example.collagehelper.mvp.main;
+package com.example.collagehelper.activity.main;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,7 +15,6 @@ import com.example.collagehelper.adapter.MyFragmentPagerAdapter;
 import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.fragment.CustomerFragment;
 import com.example.collagehelper.fragment.FormFragment;
-import com.example.collagehelper.fragment.HomeFragment;
 import com.example.collagehelper.fragment.MyFragment;
 
 import java.util.ArrayList;
@@ -201,4 +198,8 @@ public class MainActivity extends BaseActivity {
         setTittle("我的");
     }
 
+    @Override
+    public void onBackPressed() {
+        clickTwiceToExit();
+    }
 }

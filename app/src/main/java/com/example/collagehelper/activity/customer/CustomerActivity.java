@@ -1,4 +1,4 @@
-package com.example.collagehelper.mvp.customer;
+package com.example.collagehelper.activity.customer;
 
 import android.content.Intent;
 import android.os.Bundle;

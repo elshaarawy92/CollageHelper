@@ -1,16 +1,11 @@
-package com.example.collagehelper.mvp.goods;
+package com.example.collagehelper.activity.goods;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
@@ -18,9 +13,8 @@ import com.example.collagehelper.adapter.GoodsAdapter;
 import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.bean.GoodsAdapterBean;
 import com.example.collagehelper.bean.GoodsEvent;
-import com.example.collagehelper.mvp.order.OrderActivity;
+import com.example.collagehelper.activity.order.OrderActivity;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
