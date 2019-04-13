@@ -1,8 +1,6 @@
 package com.example.collagehelper.base;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,9 +18,9 @@ import android.widget.Toast;
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -175,29 +173,6 @@ public class BaseActivity extends AppCompatActivity {
                 .create(onSubscribe)
                 .throttleFirst(seconds,TimeUnit.SECONDS)
                 .subscribe(observer);
-    }
-
-    //将Bitmap转化成二进制
-    public byte[] getBitmapByte(Bitmap bitmap){
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-        try {
-            out.flush();
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return out.toByteArray();
-    }
-
-    //将二进制转化成Bitmap
-    public Bitmap getBitmapFromByte(byte[] temp){
-        if(temp != null ){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(temp, 0, temp.length);
-            return bitmap;
-        }else{
-            return null;
-        }
     }
 
     public void hideLeftImage(){
