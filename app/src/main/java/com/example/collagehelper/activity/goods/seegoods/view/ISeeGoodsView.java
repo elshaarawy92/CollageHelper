@@ -8,4 +8,6 @@ public interface ISeeGoodsView {
     void getGoodsSuccess(List<GoodsInfo> list);
     void getGoodsFailure();
     void noGoods();
+    void deleteSuccess();
+    void deleteFailure();
 }

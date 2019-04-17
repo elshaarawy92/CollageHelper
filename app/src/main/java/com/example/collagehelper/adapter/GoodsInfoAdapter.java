@@ -31,15 +31,9 @@ public class GoodsInfoAdapter extends RecyclerView.Adapter<GoodsInfoAdapter.MyHo
 
     private Context context;
 
-    private Map<Integer,RecyclerView.ViewHolder> viewHolderMap = new HashMap<>();
-
     public interface OnItemClickListener{
-        void onItemClick(View view, int position);
-        void onItemLongClick(View view, int position);
-    }
-
-    public Map getViewHolderMap(){
-        return viewHolderMap;
+        void onItemClick(View view, int position,int id);
+        void onItemLongClick(View view, int position,int id);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -57,6 +51,7 @@ public class GoodsInfoAdapter extends RecyclerView.Adapter<GoodsInfoAdapter.MyHo
         public ImageView goodsPicture;
         public TextView goodsName;
         public TextView goodsPrice;
+        public int id;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -76,24 +71,24 @@ public class GoodsInfoAdapter extends RecyclerView.Adapter<GoodsInfoAdapter.MyHo
 
     @Override
     public void onBindViewHolder(@NonNull final GoodsInfoAdapter.MyHolder holder, final int position) {
-        viewHolderMap.put(position,holder);
         GoodsInfo goodsInfo = list.get(position);
         Glide.with(context).load(goodsInfo.getImg()).into(holder.goodsPicture);
         holder.goodsName.setText(goodsInfo.getName());
         holder.goodsPrice.setText(goodsInfo.getPrice());
+        holder.id = goodsInfo.getId();
         if (onItemClickListener != null){
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemClick(holder.view,pos);;
+                    onItemClickListener.onItemClick(holder.view,pos,holder.id);;
                 }
             });
             holder.view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemLongClick(holder.view,pos);
+                    onItemClickListener.onItemLongClick(holder.view,pos,holder.id);
                     return false;
                 }
             });

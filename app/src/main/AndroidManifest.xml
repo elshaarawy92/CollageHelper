@@ -49,7 +49,8 @@
 
         <activity android:name=".activity.goods.managegoods.ManageGoodsActivity" />
         <activity android:name=".activity.goods.addgoods.view.AddGoodsActivity" />
-        <activity android:name=".activity.goods.seegoods.view.SeeGoodsActivity"></activity>
+        <activity android:name=".activity.goods.seegoods.view.SeeGoodsActivity" />
+        <activity android:name=".activity.goods.goodsdetails.GoodsDetailsActivity"></activity>
     </application>
 
 </manifest>

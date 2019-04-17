@@ -44,4 +44,16 @@ public class SeeGoodsPresenter {
     public void noGoods(){
         view.noGoods();
     }
+
+    public void deleteSuccess(){
+        view.deleteSuccess();
+    }
+
+    public void deleteFailure(){
+        view.deleteFailure();
+    }
+
+    public void deleteGoods(int id){
+        manager.deleteGoods(id);
+    }
 }
