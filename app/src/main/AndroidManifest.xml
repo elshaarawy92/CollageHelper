@@ -15,18 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.main.view.MainActivity"
+            android:name=".activity.seller.main.view.MainActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activity.customer.CustomerActivity"
+            android:name=".activity.seller.customer.CustomerActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activity.order.OrderActivity"
+            android:name=".activity.seller.order.OrderActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".activity.goods.GoodsActivity"
+            android:name=".activity.seller.goods.GoodsActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".activity.selectcustomer.SelectCustomerActivity" />
+        <activity android:name=".activity.seller.selectcustomer.SelectCustomerActivity" />
         <activity android:name=".activity.welcome.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,10 +47,11 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.goods.managegoods.ManageGoodsActivity" />
-        <activity android:name=".activity.goods.addgoods.view.AddGoodsActivity" />
-        <activity android:name=".activity.goods.seegoods.view.SeeGoodsActivity" />
-        <activity android:name=".activity.goods.goodsdetails.GoodsDetailsActivity"></activity>
+        <activity android:name=".activity.seller.goods.managegoods.ManageGoodsActivity" />
+        <activity android:name=".activity.seller.goods.addgoods.view.AddGoodsActivity" />
+        <activity android:name=".activity.seller.goods.seegoods.view.SeeGoodsActivity" />
+        <activity android:name=".activity.seller.goods.goodsdetails.GoodsDetailsActivity" />
+        <activity android:name=".activity.seller.goods.updategoods.view.UpdateGoodsActivity"></activity>
     </application>
 
 </manifest>

@@ -1,10 +1,8 @@
 package com.example.collagehelper.activity.login.manager;
 
-import android.util.Log;
-
 import com.example.collagehelper.activity.login.presenter.LoginPresenter;
 import com.example.collagehelper.base.BaseManager;
-import com.example.collagehelper.bean.User;
+import com.example.collagehelper.activity.seller.bean.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;

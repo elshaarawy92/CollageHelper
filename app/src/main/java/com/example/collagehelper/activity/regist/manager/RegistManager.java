@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.example.collagehelper.activity.regist.presenter.RegistPresenter;
 import com.example.collagehelper.base.BaseManager;
-import com.example.collagehelper.bean.User;
+import com.example.collagehelper.activity.seller.bean.User;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;

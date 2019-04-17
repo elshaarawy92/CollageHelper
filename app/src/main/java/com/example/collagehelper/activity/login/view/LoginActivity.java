@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 import com.example.collagehelper.activity.login.presenter.LoginPresenter;
-import com.example.collagehelper.activity.main.view.MainActivity;
+import com.example.collagehelper.activity.seller.main.view.MainActivity;
 import com.example.collagehelper.activity.regist.view.RegistActivity;
 import com.example.collagehelper.base.BaseActivity;
 

@@ -1,10 +1,8 @@
 package com.example.collagehelper.dao;
 
-import com.example.collagehelper.bean.GoodsInfo;
-import com.example.collagehelper.bean.GoodsInfoFromServer;
-import com.example.collagehelper.bean.User;
-
-import java.util.List;
+import com.example.collagehelper.activity.seller.bean.GoodsAllInfo;
+import com.example.collagehelper.activity.seller.bean.GoodsInfoFromServer;
+import com.example.collagehelper.activity.seller.bean.User;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -37,4 +35,10 @@ public interface Ask {
     @FormUrlEncoded
     Call<ResponseBody> deleteGoods(@Field("id")int id);
 
+    @POST("update_goods")
+    @Multipart
+    Call<ResponseBody> updateGoods(@Part("id")RequestBody id,@Part("phone")RequestBody phone, @Part("goods_name")RequestBody goodsName, @Part("goods_price")RequestBody goodsPrice, @Part("goods_des")RequestBody goodsDes, @Part()MultipartBody.Part file);
+
+    @GET("get_goods_by_id")
+    Call<GoodsAllInfo> getGoodsById(@Query("id")int id);
 }

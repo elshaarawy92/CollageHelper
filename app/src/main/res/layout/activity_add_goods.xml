@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffffff"
-    tools:context=".activity.goods.addgoods.view.AddGoodsActivity">
+    tools:context=".activity.seller.goods.addgoods.view.AddGoodsActivity">
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:id="@+id/iv_goods_image"
         android:layout_gravity="center_horizontal"
+        android:scaleType="fitXY"
         android:layout_marginTop="20dp"
         android:background="@drawable/add_good_image"/>
 
