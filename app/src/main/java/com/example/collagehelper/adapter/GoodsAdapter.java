@@ -33,8 +33,6 @@ public class GoodsAdapter extends RecyclerView.Adapter<GoodsAdapter.MyHolder> {
 
     private Context context;
 
-    private LinkedList<GoodsEvent> linkedList = new LinkedList<>();
-
     private Map<Integer,RecyclerView.ViewHolder> viewHolderMap = new HashMap<>();
 
     public interface OnItemClickListener{

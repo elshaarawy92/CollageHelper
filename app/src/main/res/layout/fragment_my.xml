@@ -19,8 +19,7 @@
             android:layout_height="100dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:id="@+id/civ_head"
-            android:src="@drawable/shaarawy"/>
+            android:id="@+id/civ_head"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -32,8 +31,7 @@
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_vertical"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
-                android:text="shaarawy"/>
+                android:textSize="30sp"/>
         </LinearLayout>
     </LinearLayout>
 

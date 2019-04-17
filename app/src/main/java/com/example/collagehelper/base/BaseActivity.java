@@ -40,6 +40,8 @@ public class BaseActivity extends AppCompatActivity {
     private FrameLayout fContent;
     private static boolean isExit = false;
 
+    public static String phone;
+
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {

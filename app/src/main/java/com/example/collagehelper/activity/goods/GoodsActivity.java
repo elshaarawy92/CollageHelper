@@ -28,7 +28,6 @@ import java.util.List;
  */
 public class GoodsActivity extends BaseActivity {
 
-    private static String TAG = "GoodsActivity";
     private double accountMoney;
 
     private List<GoodsEvent> goodsEventList;

@@ -1,49 +1,74 @@
 package com.example.collagehelper.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
-    private String phone;
-    private String name;
-    private String pwd;
-    private int type;
-    private byte[] head;
+    private String status;
+    private Data data;
 
-    public String getPhone() {
-        return phone;
+    public String getStatus() {
+        return status;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public Data getData() {
+        return data;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setData(Data data) {
+        this.data = data;
     }
 
-    public String getPwd() {
-        return pwd;
+    public class Data{
+        private String phone;
+        private String name;
+        private String password;
+        private String type;
+        private String head;
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getHead() {
+            return head;
+        }
+
+        public void setHead(String head) {
+            this.head = head;
+        }
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public byte[] getHead() {
-        return head;
-    }
-
-    public void setHead(byte[] head) {
-        this.head = head;
-    }
 }

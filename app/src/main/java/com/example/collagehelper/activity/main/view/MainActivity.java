@@ -1,4 +1,4 @@
-package com.example.collagehelper.activity.main;
+package com.example.collagehelper.activity.main.view;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.main.presenter.MainPresenter;
 import com.example.collagehelper.adapter.MyFragmentPagerAdapter;
 import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.fragment.CustomerFragment;
@@ -20,7 +21,7 @@ import com.example.collagehelper.fragment.MyFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements IMainView {
 
     private ViewPager vpPage;
     //private ImageButton ivHome;
@@ -37,6 +38,10 @@ public class MainActivity extends BaseActivity {
     private MyFragment myFragment;
     private List<Fragment> list;
     private MyFragmentPagerAdapter adapter;
+
+    private Intent intent;
+    private MainPresenter mainPresenter;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +112,14 @@ public class MainActivity extends BaseActivity {
         adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),list);
         vpPage.setAdapter(adapter);
         setTittle("主页");
+        intent = getIntent();
+        phone = intent.getStringExtra("phone");
+        Bundle bundle = new Bundle();
+        bundle.putString("phone",phone);
+        formFragment.setArguments(bundle);
+        customerFragment.setArguments(bundle);
+        myFragment.setArguments(bundle);
+        mainPresenter = new MainPresenter(this);
     }
 
     //初始化list
@@ -201,5 +214,15 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         clickTwiceToExit();
+    }
+
+    @Override
+    public void getUserInfoSuccess(String name,String headUrl) {
+
+    }
+
+    @Override
+    public void getUserInfoFaiure() {
+
     }
 }
