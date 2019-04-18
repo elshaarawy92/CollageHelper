@@ -1,6 +1,6 @@
 package com.example.collagehelper.activity.seller.goods.seegoods.view;
 
-import com.example.collagehelper.activity.seller.bean.GoodsInfo;
+import com.example.collagehelper.bean.GoodsInfo;
 
 import java.util.List;
 

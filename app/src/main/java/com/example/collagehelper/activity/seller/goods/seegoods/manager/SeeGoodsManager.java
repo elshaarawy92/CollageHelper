@@ -2,7 +2,7 @@ package com.example.collagehelper.activity.seller.goods.seegoods.manager;
 
 import com.example.collagehelper.activity.seller.goods.seegoods.presenter.SeeGoodsPresenter;
 import com.example.collagehelper.base.BaseManager;
-import com.example.collagehelper.activity.seller.bean.GoodsInfoFromServer;
+import com.example.collagehelper.bean.GoodsInfoFromServer;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

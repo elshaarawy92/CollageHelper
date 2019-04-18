@@ -2,8 +2,8 @@ package com.example.collagehelper.activity.seller.goods.seegoods.presenter;
 
 import com.example.collagehelper.activity.seller.goods.seegoods.manager.SeeGoodsManager;
 import com.example.collagehelper.activity.seller.goods.seegoods.view.ISeeGoodsView;
-import com.example.collagehelper.activity.seller.bean.GoodsInfo;
-import com.example.collagehelper.activity.seller.bean.GoodsInfoFromServer;
+import com.example.collagehelper.bean.GoodsInfo;
+import com.example.collagehelper.bean.GoodsInfoFromServer;
 
 import java.util.ArrayList;
 import java.util.List;

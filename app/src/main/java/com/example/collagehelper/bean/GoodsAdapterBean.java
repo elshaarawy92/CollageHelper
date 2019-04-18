@@ -1,4 +1,4 @@
-package com.example.collagehelper.activity.seller.bean;
+package com.example.collagehelper.bean;
 
 /**
  * 商品的recyclerview 的 adpter的适配类

@@ -1,4 +1,4 @@
-package com.example.collagehelper.activity.seller.adapter;
+package com.example.collagehelper.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.collagehelper.R;
-import com.example.collagehelper.activity.seller.bean.GoodsAdapterBean;
-import com.example.collagehelper.activity.seller.bean.GoodsEvent;
+import com.example.collagehelper.bean.GoodsAdapterBean;
+import com.example.collagehelper.bean.GoodsEvent;
 
 import org.greenrobot.eventbus.EventBus;
 

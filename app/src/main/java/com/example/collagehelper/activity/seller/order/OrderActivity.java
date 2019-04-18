@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 import com.example.collagehelper.base.BaseActivity;
-import com.example.collagehelper.activity.seller.bean.GoodsEvent;
+import com.example.collagehelper.bean.GoodsEvent;
 import com.example.collagehelper.activity.seller.goods.GoodsActivity;
 import com.example.collagehelper.activity.seller.selectcustomer.SelectCustomerActivity;
 

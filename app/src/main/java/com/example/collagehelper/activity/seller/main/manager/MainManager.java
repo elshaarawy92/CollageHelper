@@ -2,7 +2,7 @@ package com.example.collagehelper.activity.seller.main.manager;
 
 import com.example.collagehelper.activity.seller.main.presenter.MainPresenter;
 import com.example.collagehelper.base.BaseManager;
-import com.example.collagehelper.activity.seller.bean.User;
+import com.example.collagehelper.bean.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;

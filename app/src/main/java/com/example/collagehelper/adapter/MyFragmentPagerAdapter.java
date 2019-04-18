@@ -1,4 +1,4 @@
-package com.example.collagehelper.activity.seller.adapter;
+package com.example.collagehelper.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

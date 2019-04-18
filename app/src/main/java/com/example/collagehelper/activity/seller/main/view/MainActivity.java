@@ -13,7 +13,7 @@ import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 import com.example.collagehelper.activity.seller.fragment.MessageFragment;
 import com.example.collagehelper.activity.seller.main.presenter.MainPresenter;
-import com.example.collagehelper.activity.seller.adapter.MyFragmentPagerAdapter;
+import com.example.collagehelper.adapter.MyFragmentPagerAdapter;
 import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.activity.seller.fragment.CustomerFragment;
 import com.example.collagehelper.activity.seller.fragment.FormFragment;

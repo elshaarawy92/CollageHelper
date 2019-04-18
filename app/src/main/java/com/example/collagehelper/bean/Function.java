@@ -1,4 +1,4 @@
-package com.example.collagehelper.activity.seller.bean;
+package com.example.collagehelper.bean;
 
 /**
  * 我的界面Recyclerview的数据适配bean类(同样适用于Customer的recyclerview)

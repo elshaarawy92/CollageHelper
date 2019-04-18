@@ -24,9 +24,11 @@ public class LoginPresenter {
         loginView.typeWrong();
     }
 
-    public void loginSuccess(){
-        loginView.loginSuccess();
+    public void loginSuccessBySeller(){
+        loginView.loginSuccessBySeller();
     }
+
+    public void loginSuccessByCustomer(){loginView.loginSuccessByCustomer();}
 
     public void loginFailure(){
         loginView.loginFailure();

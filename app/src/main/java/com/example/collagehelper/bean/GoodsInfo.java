@@ -1,4 +1,4 @@
-package com.example.collagehelper.activity.seller.bean;
+package com.example.collagehelper.bean;
 
 public class GoodsInfo {
     private int id;

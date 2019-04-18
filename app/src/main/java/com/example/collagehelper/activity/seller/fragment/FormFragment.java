@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
-import com.example.collagehelper.activity.seller.adapter.DepthPageTransformer;
-import com.example.collagehelper.activity.seller.adapter.MyPager;
+import com.example.collagehelper.adapter.DepthPageTransformer;
+import com.example.collagehelper.adapter.MyPager;
 import com.example.collagehelper.base.BaseFragment;
 import com.example.collagehelper.activity.seller.order.OrderActivity;
 

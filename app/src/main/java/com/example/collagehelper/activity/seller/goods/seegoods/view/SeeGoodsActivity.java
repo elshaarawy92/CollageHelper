@@ -13,9 +13,9 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.activity.seller.goods.goodsdetails.GoodsDetailsActivity;
 import com.example.collagehelper.activity.seller.goods.seegoods.presenter.SeeGoodsPresenter;
 import com.example.collagehelper.activity.seller.goods.updategoods.view.UpdateGoodsActivity;
-import com.example.collagehelper.activity.seller.adapter.GoodsInfoAdapter;
+import com.example.collagehelper.adapter.GoodsInfoAdapter;
 import com.example.collagehelper.base.BaseActivity;
-import com.example.collagehelper.activity.seller.bean.GoodsInfo;
+import com.example.collagehelper.bean.GoodsInfo;
 
 import java.util.List;
 

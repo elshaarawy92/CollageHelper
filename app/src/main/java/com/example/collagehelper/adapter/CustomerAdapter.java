@@ -1,74 +1,61 @@
-package com.example.collagehelper.activity.seller.adapter;
+package com.example.collagehelper.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.collagehelper.R;
-import com.example.collagehelper.activity.seller.bean.Function;
+import com.example.collagehelper.bean.Function;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
- * 我的界面的Recyclerview的adapter
- * Created by liang on 2018/10/29
+ * 客户界面的客户Recyclerview的适配器
+ * Created by liang on 2018/10/30
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.MyViewHolder> {
+
+    private List<Function> list;
+
+    private OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener{
         void onItemClick(View view, int position);
-        void onItemLongClick(View view, int position);
+        void onItemLongClick(View view,int position);
     }
-
-    private List<Function> list = new ArrayList<>();
-    private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public MyAdapter(List<Function> list){
+    public CustomerAdapter(List<Function> list){
         this.list = list;
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder{
-
-        ImageView rvIv;
-        TextView rvTv;
-        View view;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            view = itemView;
-            rvIv = itemView.findViewById(R.id.rv_iv);
-            rvTv = itemView.findViewById(R.id.rv_tv);
-        }
     }
 
     @NonNull
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_my,parent,false);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_customer,parent,false);
         MyViewHolder viewHolder = new MyViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
         Function function = list.get(position);
-        holder.rvIv.setBackgroundResource(function.getPicture());
-        holder.rvTv.setText(function.getText());
+        holder.civCustomerHead.setImageResource(function.getPicture());
+        holder.tvCustomerName.setText(function.getText());
         if (onItemClickListener != null){
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int pos = holder.getLayoutPosition();
-                    onItemClickListener.onItemClick(holder.view,pos);
+                    onItemClickListener.onItemClick(holder.view,pos);;
                 }
             });
             holder.view.setOnLongClickListener(new View.OnLongClickListener() {
@@ -85,5 +72,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+
+        View view;
+        CircleImageView civCustomerHead;
+        TextView tvCustomerName;
+
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            view = itemView;
+            civCustomerHead = itemView.findViewById(R.id.civ_customer_head);
+            tvCustomerName = itemView.findViewById(R.id.tv_customer_name);
+        }
     }
 }

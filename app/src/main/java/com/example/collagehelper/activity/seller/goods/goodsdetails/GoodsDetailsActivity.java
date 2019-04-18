@@ -11,7 +11,7 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.activity.seller.goods.updategoods.presenter.UpdateGoodsPresenter;
 import com.example.collagehelper.activity.seller.goods.updategoods.view.IUpdateGoodsView;
 import com.example.collagehelper.base.BaseActivity;
-import com.example.collagehelper.activity.seller.bean.GoodsAllInfo;
+import com.example.collagehelper.bean.GoodsAllInfo;
 
 public class GoodsDetailsActivity extends BaseActivity implements IUpdateGoodsView {
 

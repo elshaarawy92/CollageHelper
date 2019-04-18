@@ -33,7 +33,7 @@ import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 import com.example.collagehelper.activity.seller.goods.updategoods.presenter.UpdateGoodsPresenter;
 import com.example.collagehelper.base.BaseActivity;
-import com.example.collagehelper.activity.seller.bean.GoodsAllInfo;
+import com.example.collagehelper.bean.GoodsAllInfo;
 import com.example.collagehelper.utils.BitmapUtils;
 
 import java.io.File;

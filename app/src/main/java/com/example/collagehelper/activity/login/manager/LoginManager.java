@@ -2,7 +2,7 @@ package com.example.collagehelper.activity.login.manager;
 
 import com.example.collagehelper.activity.login.presenter.LoginPresenter;
 import com.example.collagehelper.base.BaseManager;
-import com.example.collagehelper.activity.seller.bean.User;
+import com.example.collagehelper.bean.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +28,11 @@ public class LoginManager extends BaseManager {
                     }else if (!type.equals(response.body().getData().getType())){
                         loginPresenter.typeWrong();
                     }else {
-                        loginPresenter.loginSuccess();
+                        if (type == "1"){
+                            loginPresenter.loginSuccessBySeller();
+                        }else {
+                            loginPresenter.loginSuccessByCustomer();
+                        }
                     }
                 }
             }

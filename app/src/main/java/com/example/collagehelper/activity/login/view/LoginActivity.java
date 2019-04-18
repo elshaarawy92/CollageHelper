@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.customer.main.view.Main2Activity;
 import com.example.collagehelper.activity.login.presenter.LoginPresenter;
 import com.example.collagehelper.activity.seller.main.view.MainActivity;
 import com.example.collagehelper.activity.regist.view.RegistActivity;
@@ -115,9 +116,18 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     @Override
-    public void loginSuccess() {
+    public void loginSuccessBySeller() {
         Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        BaseActivity.phone = etPhone.getText().toString().trim();
+        intent.putExtra("phone",etPhone.getText().toString().trim());
+        startActivity(intent);
+    }
+
+    @Override
+    public void loginSuccessByCustomer() {
+        Toast.makeText(LoginActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(LoginActivity.this,Main2Activity.class);
         BaseActivity.phone = etPhone.getText().toString().trim();
         intent.putExtra("phone",etPhone.getText().toString().trim());
         startActivity(intent);

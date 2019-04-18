@@ -1,4 +1,4 @@
-package com.example.collagehelper.activity.seller.adapter;
+package com.example.collagehelper.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.collagehelper.R;
-import com.example.collagehelper.activity.seller.bean.GoodsInfo;
+import com.example.collagehelper.bean.GoodsInfo;
 
 import java.util.List;
 

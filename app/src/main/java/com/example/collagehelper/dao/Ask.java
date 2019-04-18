@@ -1,8 +1,8 @@
 package com.example.collagehelper.dao;
 
-import com.example.collagehelper.activity.seller.bean.GoodsAllInfo;
-import com.example.collagehelper.activity.seller.bean.GoodsInfoFromServer;
-import com.example.collagehelper.activity.seller.bean.User;
+import com.example.collagehelper.bean.GoodsAllInfo;
+import com.example.collagehelper.bean.GoodsInfoFromServer;
+import com.example.collagehelper.bean.User;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -41,4 +41,7 @@ public interface Ask {
 
     @GET("get_goods_by_id")
     Call<GoodsAllInfo> getGoodsById(@Query("id")int id);
+
+    @GET("get_goods_by_name")
+    Call<GoodsInfoFromServer> getGoodsByName(@Query("name")String name);
 }

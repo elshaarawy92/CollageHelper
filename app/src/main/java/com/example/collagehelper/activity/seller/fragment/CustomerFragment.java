@@ -13,8 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.collagehelper.R;
-import com.example.collagehelper.activity.seller.adapter.CustomerAdapter;
-import com.example.collagehelper.activity.seller.bean.Function;
+import com.example.collagehelper.adapter.CustomerAdapter;
+import com.example.collagehelper.bean.Function;
 import com.example.collagehelper.activity.seller.customer.CustomerActivity;
 
 import java.util.ArrayList;

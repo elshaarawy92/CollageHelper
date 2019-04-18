@@ -2,7 +2,7 @@ package com.example.collagehelper.activity.seller.goods.updategoods.manager;
 
 import com.example.collagehelper.activity.seller.goods.updategoods.presenter.UpdateGoodsPresenter;
 import com.example.collagehelper.base.BaseManager;
-import com.example.collagehelper.activity.seller.bean.GoodsAllInfo;
+import com.example.collagehelper.bean.GoodsAllInfo;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;

@@ -1,4 +1,4 @@
-package com.example.collagehelper.activity.seller.bean;
+package com.example.collagehelper.bean;
 
 import java.io.Serializable;
 

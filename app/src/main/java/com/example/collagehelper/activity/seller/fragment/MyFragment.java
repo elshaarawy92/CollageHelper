@@ -18,9 +18,9 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.activity.seller.main.presenter.MainPresenter;
 import com.example.collagehelper.activity.seller.main.view.IMainView;
 import com.example.collagehelper.activity.seller.goods.managegoods.ManageGoodsActivity;
-import com.example.collagehelper.activity.seller.adapter.MyAdapter;
+import com.example.collagehelper.adapter.MyAdapter;
 import com.example.collagehelper.base.BaseFragment;
-import com.example.collagehelper.activity.seller.bean.Function;
+import com.example.collagehelper.bean.Function;
 
 import java.util.ArrayList;
 import java.util.List;
