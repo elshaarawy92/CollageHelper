@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -20,12 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.customer.main.presenter.Main2Presenter;
 import com.example.collagehelper.activity.customer.main.view.IMainView2;
 import com.example.collagehelper.activity.customer.searchgoodsbyname.view.SearchGoodsByNameActivity;
+import com.example.collagehelper.adapter.CollectedSellerAdapter;
+import com.example.collagehelper.base.BaseActivity;
+import com.example.collagehelper.bean.CTSDO;
+import com.example.collagehelper.bean.CollectedSeller;
 import com.example.collagehelper.bean.User;
 import com.example.collagehelper.base.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener,IMainView2 {
 
@@ -40,13 +47,21 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     boolean isRunning = false;
     private RecyclerView recyclerView;
 
+    private CollectedSellerAdapter adapter;
+    private LinearLayoutManager manager;
+
     private String name;
+    private Main2Presenter presenter;
+
+    private List<CollectedSeller> list = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
+        presenter = new Main2Presenter(this);
         initView(view);
+        presenter.getCollectedSeller(BaseActivity.phone);
         initData();
         initAdapter();
         // 开启轮询
@@ -172,6 +187,39 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void getUserInfoSuccess(User user) {
 
+    }
+
+    @Override
+    public void getCollectedSellerSuccess(CTSDO ctsdo) {
+        List<String> list = new ArrayList<>();
+        for (int i = 0;i < ctsdo.getData().size();i++){
+            list.add(ctsdo.getData().get(i).getSellerPhone());
+        }
+        for (int j = 0; j < list.size(); j++){
+            presenter.getSellerByPhone(list.get(j));
+        }
+    }
+
+    @Override
+    public void getCollectedSellerFailure() {
+
+    }
+
+    @Override
+    public void getCollectedSellerNull() {
+
+    }
+
+    @Override
+    public void getSellerSuccess(User user) {
+        CollectedSeller collectedSeller = new CollectedSeller();
+        collectedSeller.setHead(user.getData().getHead());
+        collectedSeller.setName(user.getData().getName());
+        list.add(collectedSeller);
+        adapter = new CollectedSellerAdapter(list,getContext());
+        manager = new LinearLayoutManager(getContext());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(manager);
     }
 
     class MyAdapter extends PagerAdapter {

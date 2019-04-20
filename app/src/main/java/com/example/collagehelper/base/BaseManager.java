@@ -23,6 +23,13 @@ public class BaseManager {
             .build();
     public Ask goodsAsk = retrofit2.create(Ask.class);
 
+    private Retrofit retrofit3 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/cts/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask ctsAsk = retrofit3.create(Ask.class);
+
     public RequestBody toRequestBody(String value) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), value);
         return requestBody;

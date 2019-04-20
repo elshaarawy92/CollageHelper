@@ -49,5 +49,28 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:id="@+id/rv_seller_goods"></android.support.v7.widget.RecyclerView>
+        android:id="@+id/rv_seller_goods"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_contact_seller"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#01B468"
+            android:text="联系店家"
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+        <Button
+            android:id="@+id/btn_collect_seller"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:textColor="#01B468"
+            android:textSize="16sp"/>
+    </LinearLayout>
 </LinearLayout>

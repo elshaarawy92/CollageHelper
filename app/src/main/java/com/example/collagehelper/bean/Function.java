@@ -10,6 +10,10 @@ public class Function {
 
     private String text;
 
+    public Function(){
+
+    }
+
     public Function(int picture, String text) {
         this.picture = picture;
         this.text = text;

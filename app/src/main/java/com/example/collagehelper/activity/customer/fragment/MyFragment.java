@@ -16,6 +16,7 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.main.presenter.Main2Presenter;
 import com.example.collagehelper.activity.customer.main.view.IMainView2;
 import com.example.collagehelper.adapter.MyAdapter;
+import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.Function;
 import com.example.collagehelper.bean.User;
 import com.example.collagehelper.base.BaseActivity;
@@ -99,5 +100,25 @@ public class MyFragment extends BaseFragment implements IMainView2 {
         Glide.with(getContext()).load(user.getData().getHead())
                 .signature(new ObjectKey(updateTime))
                 .into(civHead);
+    }
+
+    @Override
+    public void getCollectedSellerSuccess(CTSDO ctsdo) {
+
+    }
+
+    @Override
+    public void getCollectedSellerFailure() {
+
+    }
+
+    @Override
+    public void getCollectedSellerNull() {
+
+    }
+
+    @Override
+    public void getSellerSuccess(User user) {
+
     }
 }

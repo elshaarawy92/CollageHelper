@@ -2,9 +2,11 @@ package com.example.collagehelper.activity.customer.sellerdetails.manager;
 
 import com.example.collagehelper.activity.customer.sellerdetails.presenter.SellerDetailsPresenter;
 import com.example.collagehelper.base.BaseManager;
+import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.GoodsInfoFromServer;
 import com.example.collagehelper.bean.User;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,6 +44,55 @@ public class SellerDetailsManager extends BaseManager {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void collectSeller(String cPhone,String sPhone){
+        Call<ResponseBody> call = ctsAsk.collectSeller(cPhone,sPhone);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                presenter.collectSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                presenter.collectFailure();
+            }
+        });
+    }
+
+    public void getCollectedSeller(String cPhone){
+        Call<CTSDO> ctsdoCall = ctsAsk.getCollectedSeller(cPhone);
+        ctsdoCall.enqueue(new Callback<CTSDO>() {
+            @Override
+            public void onResponse(Call<CTSDO> call, Response<CTSDO> response) {
+                if (response.body().getStatus().equals("failure")){
+                    presenter.getCollectedSellerNull();
+                }else {
+                    presenter.getCollectedSellerSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CTSDO> call, Throwable t) {
+                presenter.getCollectedSellerFailure();
+            }
+        });
+    }
+
+    public void deleteSellerByPrimaryKey(int id){
+        Call<ResponseBody> call = ctsAsk.deleteSellerById(id);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                presenter.deleteSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                presenter.deleteFailure();
             }
         });
     }

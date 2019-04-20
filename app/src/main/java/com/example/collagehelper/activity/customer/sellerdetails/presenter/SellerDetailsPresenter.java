@@ -2,6 +2,7 @@ package com.example.collagehelper.activity.customer.sellerdetails.presenter;
 
 import com.example.collagehelper.activity.customer.sellerdetails.manager.SellerDetailsManager;
 import com.example.collagehelper.activity.customer.sellerdetails.view.ISellerDetailsView;
+import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.GoodsInfo2;
 import com.example.collagehelper.bean.GoodsInfoFromServer;
 import com.example.collagehelper.bean.User;
@@ -47,5 +48,45 @@ public class SellerDetailsPresenter {
 
     public void getSellerSuccess(User user){
         view.getSellerSuccess(user);
+    }
+
+    public void collectSuccess(){
+        view.collectSuccess();
+    }
+
+    public void collectFailure(){
+        view.collectFailure();
+    }
+
+    public void collectSeller(String cPhone,String sPhone){
+        manager.collectSeller(cPhone,sPhone);
+    }
+
+    public void getCollectedSeller(String cPhone){
+        manager.getCollectedSeller(cPhone);
+    }
+
+    public void deleteSellerById(int id){
+        manager.deleteSellerByPrimaryKey(id);
+    }
+
+    public void getCollectedSellerSuccess(CTSDO ctsdo){
+        view.getCollectedSellerSuccess(ctsdo);
+    }
+
+    public void getCollectedSellerFailure(){
+        view.getCollectedSellerFailure();
+    }
+
+    public void getCollectedSellerNull(){
+        view.getCollectedSellerNull();
+    }
+
+    public void deleteSuccess(){
+        view.deleteSuccess();
+    }
+
+    public void deleteFailure(){
+        view.deleteFailure();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.collagehelper.dao;
 
+import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.GoodsAllInfo;
 import com.example.collagehelper.bean.GoodsInfoFromServer;
 import com.example.collagehelper.bean.User;
@@ -44,4 +45,13 @@ public interface Ask {
 
     @GET("get_goods_by_name")
     Call<GoodsInfoFromServer> getGoodsByName(@Query("name")String name);
+
+    @GET("collect_seller")
+    Call<ResponseBody> collectSeller(@Query("customer_phone")String cPhone,@Query("seller_phone")String sPhone);
+
+    @GET("get_seller")
+    Call<CTSDO> getCollectedSeller(@Query("customer_phone")String cPhone);
+
+    @GET("delete_seller")
+    Call<ResponseBody> deleteSellerById(@Query("id")int id);
 }

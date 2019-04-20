@@ -16,6 +16,7 @@ import com.example.collagehelper.activity.customer.fragment.MessageFragment;
 import com.example.collagehelper.activity.customer.fragment.MyFragment;
 import com.example.collagehelper.activity.customer.fragment.ShoppingCartFragment;
 import com.example.collagehelper.adapter.MyFragmentPagerAdapter;
+import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.User;
 import com.example.collagehelper.base.BaseActivity;
 
@@ -234,6 +235,26 @@ public class Main2Activity extends BaseActivity implements IMainView2 {
 
     @Override
     public void getUserInfoSuccess(User user) {
+
+    }
+
+    @Override
+    public void getCollectedSellerSuccess(CTSDO ctsdo) {
+
+    }
+
+    @Override
+    public void getCollectedSellerFailure() {
+
+    }
+
+    @Override
+    public void getCollectedSellerNull() {
+
+    }
+
+    @Override
+    public void getSellerSuccess(User user) {
 
     }
 }
