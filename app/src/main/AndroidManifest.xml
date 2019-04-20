@@ -52,9 +52,12 @@
         <activity android:name=".activity.seller.goods.seegoods.view.SeeGoodsActivity" />
         <activity android:name=".activity.seller.goods.goodsdetails.GoodsDetailsActivity" />
         <activity android:name=".activity.seller.goods.updategoods.view.UpdateGoodsActivity" />
-        <activity android:name=".activity.customer.main.view.Main2Activity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
-        <activity android:name=".activity.customer.searchgoodsbyname.view.SearchGoodsByNameActivity"/>
+        <activity
+            android:name=".activity.customer.main.view.Main2Activity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".activity.customer.searchgoodsbyname.view.SearchGoodsByNameActivity" />
+        <activity android:name=".activity.customer.goodsdetails.view.GoodsDetailActivity" />
+        <activity android:name=".activity.customer.sellerdetails.view.SellerDetailsActivity"></activity>
     </application>
 
 </manifest>
