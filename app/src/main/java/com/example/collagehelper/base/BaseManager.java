@@ -30,6 +30,21 @@ public class BaseManager {
             .build();
     public Ask ctsAsk = retrofit3.create(Ask.class);
 
+    private Retrofit retrofit4 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/cart/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask cartAsk = retrofit4.create(Ask.class);
+
+    private Retrofit retrofit5 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/order/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask orderAsk = retrofit5.create(Ask.class);
+
+
     public RequestBody toRequestBody(String value) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), value);
         return requestBody;

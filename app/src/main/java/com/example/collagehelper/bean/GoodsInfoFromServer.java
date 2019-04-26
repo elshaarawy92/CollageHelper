@@ -5,6 +5,7 @@ import java.util.List;
 public class GoodsInfoFromServer {
     private String status;
     private List<Data> data;
+
     public void setStatus(String status) {
         this.status = status;
     }

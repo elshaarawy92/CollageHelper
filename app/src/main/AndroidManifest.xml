@@ -57,7 +57,8 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activity.customer.searchgoodsbyname.view.SearchGoodsByNameActivity" />
         <activity android:name=".activity.customer.goodsdetails.view.GoodsDetailActivity" />
-        <activity android:name=".activity.customer.sellerdetails.view.SellerDetailsActivity"></activity>
+        <activity android:name=".activity.customer.sellerdetails.view.SellerDetailsActivity" />
+        <activity android:name=".activity.customer.order.view.OrderActivity"></activity>
     </application>
 
 </manifest>

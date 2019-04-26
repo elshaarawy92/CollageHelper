@@ -1,5 +1,6 @@
 package com.example.collagehelper.activity.customer.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.main.presenter.Main2Presenter;
 import com.example.collagehelper.activity.customer.main.view.IMainView2;
+import com.example.collagehelper.activity.customer.order.view.OrderActivity;
 import com.example.collagehelper.adapter.MyAdapter;
 import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.Function;
@@ -68,6 +70,8 @@ public class MyFragment extends BaseFragment implements IMainView2 {
                     case 1:
                         break;
                     case 2:
+                        Intent intent = new Intent(getContext(),OrderActivity.class);
+                        startActivity(intent);
                         break;
                     case 3:
                         break;

@@ -75,5 +75,17 @@ public class GoodsAllInfo {
         public void setGoodsDes(String goodsDes) {
             this.goodsDes = goodsDes;
         }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "goodsId=" + goodsId +
+                    ", phone='" + phone + '\'' +
+                    ", goodsImg='" + goodsImg + '\'' +
+                    ", goodsName='" + goodsName + '\'' +
+                    ", goodsPrice='" + goodsPrice + '\'' +
+                    ", goodsDes='" + goodsDes + '\'' +
+                    '}';
+        }
     }
 }

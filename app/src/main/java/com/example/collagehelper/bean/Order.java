@@ -4,31 +4,15 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-/**
- * 订单表
- * Created by liang on 2018/11/13
- */
-@Entity(tableName = "order")
 public class Order {
-
-    @PrimaryKey
-    public int id;
-
-    @ColumnInfo(name = "customer_id")
-    public int customerId;
-
-    @ColumnInfo(name = "sum_of_money")
-    public double sumOfMoney;
-
-    @ColumnInfo(name = "item_number")
-    public int itemNumber;
-
-    @ColumnInfo(name = "address_id")
-    public int addressId;
-
-    public String time;
-
-    public int status;
+    private int id;
+    private String customerPhone;
+    private String sellerPhone;
+    private String orderId;
+    private String time;
+    private String money;
+    private int goodsId;
+    private int goodsCount;
 
     public int getId() {
         return id;
@@ -38,36 +22,28 @@ public class Order {
         this.id = id;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public String getCustomerPhone() {
+        return customerPhone;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
     }
 
-    public double getSumOfMoney() {
-        return sumOfMoney;
+    public String getSellerPhone() {
+        return sellerPhone;
     }
 
-    public void setSumOfMoney(double sumOfMoney) {
-        this.sumOfMoney = sumOfMoney;
+    public void setSellerPhone(String sellerPhone) {
+        this.sellerPhone = sellerPhone;
     }
 
-    public int getItemNumber() {
-        return itemNumber;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setItemNumber(int itemNumber) {
-        this.itemNumber = itemNumber;
-    }
-
-    public int getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getTime() {
@@ -78,11 +54,27 @@ public class Order {
         this.time = time;
     }
 
-    public int getStatus() {
-        return status;
+    public String getMoney() {
+        return money;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public int getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(int goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public int getGoodsCount() {
+        return goodsCount;
+    }
+
+    public void setGoodsCount(int goodsCount) {
+        this.goodsCount = goodsCount;
     }
 }

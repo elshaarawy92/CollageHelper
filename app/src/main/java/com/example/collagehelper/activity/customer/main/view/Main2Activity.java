@@ -257,4 +257,9 @@ public class Main2Activity extends BaseActivity implements IMainView2 {
     public void getSellerSuccess(User user) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        clickTwiceToExit();
+    }
 }

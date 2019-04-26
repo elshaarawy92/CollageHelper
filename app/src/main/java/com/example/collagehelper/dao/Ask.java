@@ -3,7 +3,11 @@ package com.example.collagehelper.dao;
 import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.GoodsAllInfo;
 import com.example.collagehelper.bean.GoodsInfoFromServer;
+import com.example.collagehelper.bean.Order;
+import com.example.collagehelper.bean.ShoppingCart;
 import com.example.collagehelper.bean.User;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -54,4 +58,20 @@ public interface Ask {
 
     @GET("delete_seller")
     Call<ResponseBody> deleteSellerById(@Query("id")int id);
+
+    @GET("add")
+    Call<ResponseBody> addToCart(@Query("phone")String phone,@Query("goods_id")int goodsId,@Query("goods_count")int goodsCount);
+
+    @GET("get")
+    Call<ShoppingCart> getFromCart(@Query("phone")String phone);
+
+    @GET("delete")
+    Call<ResponseBody> delete(@Query("id") int id);
+
+    @GET("add")
+    Call<ResponseBody> addOrder(@Query("customer_phone")String customerPhone,@Query("seller_phone") String sellerPhone,@Query("order_id")String orderId,@Query("time")String time,@Query("money")String money,@Query("goods_id")int goodsId,@Query("goods_count")int goodsCount);
+
+    @GET("sbcp")
+    Call<List<Order>> selectByCustomerPhone(@Query("customer_phone") String customerPhone);
+
 }

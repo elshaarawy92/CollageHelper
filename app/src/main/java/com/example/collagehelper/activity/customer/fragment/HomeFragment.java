@@ -24,6 +24,7 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.main.presenter.Main2Presenter;
 import com.example.collagehelper.activity.customer.main.view.IMainView2;
 import com.example.collagehelper.activity.customer.searchgoodsbyname.view.SearchGoodsByNameActivity;
+import com.example.collagehelper.activity.customer.sellerdetails.view.SellerDetailsActivity;
 import com.example.collagehelper.adapter.CollectedSellerAdapter;
 import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.bean.CTSDO;
@@ -97,12 +98,29 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                     name = etSearchGoods.getText().toString().trim();
                     Intent intent = new Intent(getContext(),SearchGoodsByNameActivity.class);
                     intent.putExtra("name",name);
-                    startActivity(intent);
+                    startActivityForResult(intent,1);
                 }
                 return false;
             }
         });
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1:
+                if (resultCode == 1){
+                    refresh();
+                }
+                break;
+
+        }
+    }
+
+    private void refresh(){
+        list.clear();
+        presenter.getCollectedSeller(BaseActivity.phone);
     }
 
     private void initView(View view){
@@ -211,7 +229,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     }
 
     @Override
-    public void getSellerSuccess(User user) {
+    public void getSellerSuccess(final User user) {
         CollectedSeller collectedSeller = new CollectedSeller();
         collectedSeller.setHead(user.getData().getHead());
         collectedSeller.setName(user.getData().getName());
@@ -220,6 +238,19 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         manager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);
+        adapter.setOnItemClickListener(new CollectedSellerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getContext(),SellerDetailsActivity.class);
+                intent.putExtra("sellerphone",user.getData().getPhone());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
     }
 
     class MyAdapter extends PagerAdapter {
@@ -260,5 +291,11 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             System.out.println("destroyItem销毁: " + position);
             container.removeView((View) object);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        list.clear();
     }
 }

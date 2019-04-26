@@ -24,4 +24,28 @@ public class GoodsDetailPresenter {
     public void getGoodsDetail(int id){
         manager.getGoodsDetail(id);
     }
+
+    public void addToCart(String phone,int goodsId,int goodsCount){
+        manager.addToCart(phone,goodsId,goodsCount);
+    }
+
+    public void addToCartSuccess(){
+        view.addToCatSuccess();
+    }
+
+    public void addToCartFailure(){
+        view.addToCartFailure();
+    }
+
+    public void addOrder(String customerPhone,String sellerPhone,String orderId,String time,String money,int goodsId,int goodsCount){
+        manager.addOrder(customerPhone,sellerPhone,orderId,time,money,goodsId,goodsCount);
+    }
+
+    public void addOrderSuccess(){
+        view.addOrderSuccess();
+    }
+
+    public void addOrderFailure(){
+        view.addOrderFailure();
+    }
 }

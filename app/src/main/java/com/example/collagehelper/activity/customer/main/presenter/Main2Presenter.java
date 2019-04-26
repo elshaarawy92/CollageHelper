@@ -27,6 +27,7 @@ public class Main2Presenter {
     }
 
     public void getCollectedSellerSuccess(CTSDO ctsdo){
+
         view.getCollectedSellerSuccess(ctsdo);
     }
 

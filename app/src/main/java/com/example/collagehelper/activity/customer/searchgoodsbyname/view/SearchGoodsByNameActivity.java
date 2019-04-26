@@ -66,4 +66,10 @@ public class SearchGoodsByNameActivity extends BaseActivity implements ISearchGo
     public void getGoodsFailure() {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        setResult(1);
+        finish();
+    }
 }
