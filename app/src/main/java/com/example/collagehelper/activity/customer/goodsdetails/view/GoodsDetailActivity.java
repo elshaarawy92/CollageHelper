@@ -131,6 +131,61 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
                 });
             }
         });
+        proxyOnClickListener(2, ivAssemble, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(GoodsDetailActivity.this);
+                View view1 = LayoutInflater.from(GoodsDetailActivity.this).inflate(R.layout.dialog_goods3,null);
+                ImageView ivDGoodsImg = view1.findViewById(R.id.iv_dialog_goods_img);
+                TextView tvDGoodsName = view1.findViewById(R.id.tv_dialog_goods_name);
+                TextView tvDGoodsPrice = view1.findViewById(R.id.tv_dialog_goods_price);
+                final TextView tvDGoodsCount = view1.findViewById(R.id.tv_dialog_goods_count);
+                ImageView ivAdd = view1.findViewById(R.id.iv_add);
+                ImageView ivMinus = view1.findViewById(R.id.iv_minus);
+                Button btnAddToCart = view1.findViewById(R.id.btn_add_to_cart);
+                Bitmap bitmap = loadBitmapFromView(ivGoodsImg);
+                ivDGoodsImg.setImageBitmap(bitmap);
+                tvDGoodsName.setText(tvGoodsName.getText().toString().trim());
+                tvDGoodsPrice.setText(tvGoodsPrice.getText().toString().trim());
+                ivAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int count = Integer.valueOf(tvDGoodsCount.getText().toString().trim());
+                        count++;
+                        tvDGoodsCount.setText(count + "");
+                    }
+                });
+                ivMinus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int count = Integer.valueOf(tvDGoodsCount.getText().toString().trim());
+                        if (count > 1){
+                            count--;
+                            tvDGoodsCount.setText(count + "");
+                        }
+                    }
+                });
+                builder.setView(view1);
+                final AlertDialog dialog = builder.show();
+                proxyOnClickListener(2, btnAddToCart, new MyClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                        String time = df.format(new Date());
+                        SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMddHHmmss");
+                        String time2 = df2.format(new Date());
+                        String assembleId = time2 + BaseActivity.phone;
+                        int count = Integer.valueOf(tvDGoodsCount.getText().toString().trim());
+                        String money = price * count + "";
+                        presenter.addAssemble(phone,sellerPhone,assembleId,time,money,id,count);
+                        dialog.dismiss();
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.assemblereciever");
+                        sendBroadcast(intent);
+                    }
+                });
+            }
+        });
         proxyOnClickListener(2, ivPay, new MyClickListener() {
             @Override
             public void onClick(View view) {
@@ -235,5 +290,15 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
     @Override
     public void addOrderFailure() {
         Toast.makeText(GoodsDetailActivity.this,"支付失败",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void addAssembleSuccess() {
+        Toast.makeText(GoodsDetailActivity.this,"发起拼团成功",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void addAssembleFailure() {
+        Toast.makeText(GoodsDetailActivity.this,"发起拼团失败",Toast.LENGTH_SHORT).show();
     }
 }

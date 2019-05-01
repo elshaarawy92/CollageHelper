@@ -44,6 +44,19 @@ public class BaseManager {
             .build();
     public Ask orderAsk = retrofit5.create(Ask.class);
 
+    private Retrofit retrofit6 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/assemble/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask assembleAsk = retrofit6.create(Ask.class);
+
+    private Retrofit retrofit7 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/ap/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask apAsk = retrofit7.create(Ask.class);
 
     public RequestBody toRequestBody(String value) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), value);

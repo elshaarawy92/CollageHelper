@@ -27,17 +27,17 @@ public class MainActivity extends BaseActivity implements IMainView {
     private ViewPager vpPage;
     //private ImageButton ivHome;
     private ImageButton ivForm;
-    private ImageButton ivCustomer;
+//    private ImageButton ivCustomer;
     private ImageButton ivMessage;
     private ImageButton ivMy;
     //private TextView tvHome;
     private TextView tvForm;
-    private TextView tvCustomer;
+//    private TextView tvCustomer;
     private TextView tvMessage;
     private TextView tvMy;
     //private HomeFragment homeFragment;
     private FormFragment formFragment;
-    private CustomerFragment customerFragment;
+//    private CustomerFragment customerFragment;
     private MessageFragment messageFragment;
     private MyFragment myFragment;
     private List<Fragment> list;
@@ -72,15 +72,15 @@ public class MainActivity extends BaseActivity implements IMainView {
                         whenAtForm();
                         break;
                     }
+//                    case 1:{
+//                        whenAtCustomer();
+//                        break;
+//                    }
                     case 1:{
-                        whenAtCustomer();
-                        break;
-                    }
-                    case 2:{
                         whenAtMessage();
                         break;
                     }
-                    case 3:{
+                    case 2:{
                         whenAtMy();
                         break;
                     }
@@ -105,18 +105,18 @@ public class MainActivity extends BaseActivity implements IMainView {
         vpPage = findViewById(R.id.vp_page);
         //ivHome = findViewById(R.id.iv_home);
         ivForm = findViewById(R.id.iv_form);
-        ivCustomer = findViewById(R.id.iv_customer);
+//        ivCustomer = findViewById(R.id.iv_customer);
         ivMessage = findViewById(R.id.iv_message);
         ivMy = findViewById(R.id.iv_my);
         //tvHome = findViewById(R.id.tv_home);
         tvForm = findViewById(R.id.tv_form);
-        tvCustomer = findViewById(R.id.tv_customer);
+//        tvCustomer = findViewById(R.id.tv_customer);
         tvMessage = findViewById(R.id.tv_message);
         tvMy = findViewById(R.id.tv_my);
         list = new ArrayList<>();
         //homeFragment = new HomeFragment();
         formFragment = new FormFragment();
-        customerFragment = new CustomerFragment();
+//        customerFragment = new CustomerFragment();
         messageFragment = new MessageFragment();
         myFragment = new MyFragment();
         initList();
@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity implements IMainView {
         Bundle bundle = new Bundle();
         bundle.putString("phone",phone);
         formFragment.setArguments(bundle);
-        customerFragment.setArguments(bundle);
+//        customerFragment.setArguments(bundle);
         myFragment.setArguments(bundle);
         mainPresenter = new MainPresenter(this);
     }
@@ -137,7 +137,7 @@ public class MainActivity extends BaseActivity implements IMainView {
     private void initList() {
         //list.add(homeFragment);
         list.add(formFragment);
-        list.add(customerFragment);
+//        list.add(customerFragment);
         list.add(messageFragment);
         list.add(myFragment);
     }
@@ -158,24 +158,24 @@ public class MainActivity extends BaseActivity implements IMainView {
                 whenAtForm();
             }
         });
-        proxyOnClickListener(2, ivCustomer, new MyClickListener() {
-            @Override
-            public void onClick(View view) {
-                vpPage.setCurrentItem(1);
-                whenAtCustomer();
-            }
-        });
+//        proxyOnClickListener(2, ivCustomer, new MyClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                vpPage.setCurrentItem(1);
+//                whenAtCustomer();
+//            }
+//        });
         proxyOnClickListener(2, ivMessage, new MyClickListener() {
             @Override
             public void onClick(View view) {
-                vpPage.setCurrentItem(2);
+                vpPage.setCurrentItem(1);
                 whenAtMessage();
             }
         });
         proxyOnClickListener(2, ivMy, new MyClickListener() {
             @Override
             public void onClick(View view) {
-                vpPage.setCurrentItem(3);
+                vpPage.setCurrentItem(2);
                 whenAtMy();
             }
         });
@@ -197,38 +197,38 @@ public class MainActivity extends BaseActivity implements IMainView {
     public void whenAtForm(){
         //ivHome.setBackgroundResource(R.drawable.homepage);
         ivForm.setBackgroundResource(R.drawable.collection);
-        ivCustomer.setBackgroundResource(R.drawable.personal_data_clicked);
+//        ivCustomer.setBackgroundResource(R.drawable.personal_data_clicked);
         ivMessage.setBackgroundResource(R.drawable.message_unclicked);
         ivMy.setBackgroundResource(R.drawable.personal_center_clicked);
         tvForm.setTextColor(Color.parseColor("#01B468"));
         //tvHome.setTextColor(Color.parseColor("#01B468"));
-        tvCustomer.setTextColor(Color.parseColor("#000000"));
+//        tvCustomer.setTextColor(Color.parseColor("#000000"));
         tvMessage.setTextColor(Color.parseColor("#000000"));
         tvMy.setTextColor(Color.parseColor("#000000"));
         setTittle("订单");
     }
 
-    public void whenAtCustomer(){
-        //ivHome.setBackgroundResource(R.drawable.homepage);
-        ivForm.setBackgroundResource(R.drawable.collection_clicked);
-        ivCustomer.setBackgroundResource(R.drawable.personal_data);
-        ivMessage.setBackgroundResource(R.drawable.message_unclicked);
-        ivMy.setBackgroundResource(R.drawable.personal_center_clicked);
-        tvCustomer.setTextColor(Color.parseColor("#01B468"));
-        //tvHome.setTextColor(Color.parseColor("#01B468"));
-        tvForm.setTextColor(Color.parseColor("#000000"));
-        tvMessage.setTextColor(Color.parseColor("#000000"));
-        tvMy.setTextColor(Color.parseColor("#000000"));
-        setTittle("客户");
-    }
+//    public void whenAtCustomer(){
+//        //ivHome.setBackgroundResource(R.drawable.homepage);
+//        ivForm.setBackgroundResource(R.drawable.collection_clicked);
+//        ivCustomer.setBackgroundResource(R.drawable.personal_data);
+//        ivMessage.setBackgroundResource(R.drawable.message_unclicked);
+//        ivMy.setBackgroundResource(R.drawable.personal_center_clicked);
+//        tvCustomer.setTextColor(Color.parseColor("#01B468"));
+//        //tvHome.setTextColor(Color.parseColor("#01B468"));
+//        tvForm.setTextColor(Color.parseColor("#000000"));
+//        tvMessage.setTextColor(Color.parseColor("#000000"));
+//        tvMy.setTextColor(Color.parseColor("#000000"));
+//        setTittle("客户");
+//    }
 
     public void whenAtMessage(){
         //ivHome.setBackgroundResource(R.drawable.homepage);
         ivMessage.setBackgroundResource(R.drawable.message_clicked);
         ivForm.setBackgroundResource(R.drawable.collection_clicked);
-        ivCustomer.setBackgroundResource(R.drawable.personal_data_clicked);
+//        ivCustomer.setBackgroundResource(R.drawable.personal_data_clicked);
         ivMy.setBackgroundResource(R.drawable.personal_center_clicked);
-        tvCustomer.setTextColor(Color.parseColor("#000000"));
+//        tvCustomer.setTextColor(Color.parseColor("#000000"));
         tvMessage.setTextColor(Color.parseColor("#01B468"));
         //tvHome.setTextColor(Color.parseColor("#01B468"));
         tvForm.setTextColor(Color.parseColor("#000000"));
@@ -240,11 +240,11 @@ public class MainActivity extends BaseActivity implements IMainView {
         //ivHome.setBackgroundResource(R.drawable.homepage);
         ivMessage.setBackgroundResource(R.drawable.message_unclicked);
         ivForm.setBackgroundResource(R.drawable.collection_clicked);
-        ivCustomer.setBackgroundResource(R.drawable.personal_data_clicked);
+//        ivCustomer.setBackgroundResource(R.drawable.personal_data_clicked);
         ivMy.setBackgroundResource(R.drawable.personal_center);
         tvMy.setTextColor(Color.parseColor("#01B468"));
         //tvHome.setTextColor(Color.parseColor("#01B468"));
-        tvCustomer.setTextColor(Color.parseColor("#000000"));
+//        tvCustomer.setTextColor(Color.parseColor("#000000"));
         tvMessage.setTextColor(Color.parseColor("#000000"));
         tvForm.setTextColor(Color.parseColor("#000000"));
         setTittle("我的");

@@ -55,6 +55,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private Main2Presenter presenter;
 
     private List<CollectedSeller> list = new ArrayList<>();
+    private List<CollectedSeller> list1 = new ArrayList<>();
 
     @Nullable
     @Override
@@ -234,7 +235,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         collectedSeller.setHead(user.getData().getHead());
         collectedSeller.setName(user.getData().getName());
         list.add(collectedSeller);
-        adapter = new CollectedSellerAdapter(list,getContext());
+        list1.clear();
+        list1.addAll(list);
+        adapter = new CollectedSellerAdapter(list1,getContext());
         manager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(manager);

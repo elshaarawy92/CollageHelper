@@ -24,6 +24,8 @@ public class OrderActivity extends BaseActivity implements IOrderView{
     private OrderPresenter presenter;
     private List<OrderAdapterBean1> bList1 = new ArrayList<>();
     private List<OrderAdapterBean2> bList2 = new ArrayList<>();
+    private List<OrderAdapterBean1> bList11 = new ArrayList<>();
+    private List<OrderAdapterBean2> bList21 = new ArrayList<>();
     private List<Integer> iList = new ArrayList<>();
     OrderAdapterBean1 orderAdapterBean1;
     OrderAdapterBean2 orderAdapterBean2;
@@ -77,7 +79,11 @@ public class OrderActivity extends BaseActivity implements IOrderView{
             getGoods(iList);
             return;
         }
-        adapter = new OrderAdapter(bList1,bList2,OrderActivity.this);
+        bList11.clear();
+        bList21.clear();
+        bList11.addAll(bList1);
+        bList21.addAll(bList21);
+        adapter = new OrderAdapter(bList11,bList21,OrderActivity.this);
         manager = new LinearLayoutManager(OrderActivity.this);
         rvOrder.setAdapter(adapter);
         rvOrder.setLayoutManager(manager);
@@ -93,12 +99,14 @@ public class OrderActivity extends BaseActivity implements IOrderView{
         super.onStop();
         bList1.clear();
         bList2.clear();
+        iList.clear();
         rvOrder.setAdapter(null);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        i = 0;
         presenter.getOrder(BaseActivity.phone);
     }
 
@@ -107,6 +115,7 @@ public class OrderActivity extends BaseActivity implements IOrderView{
         super.onDestroy();
         bList1.clear();
         bList2.clear();
+        iList.clear();
         rvOrder.setAdapter(null);
     }
 }

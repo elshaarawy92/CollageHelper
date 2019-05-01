@@ -1,5 +1,7 @@
 package com.example.collagehelper.dao;
 
+import com.example.collagehelper.bean.APDO;
+import com.example.collagehelper.bean.Assemble;
 import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.GoodsAllInfo;
 import com.example.collagehelper.bean.GoodsInfoFromServer;
@@ -74,4 +76,15 @@ public interface Ask {
     @GET("sbcp")
     Call<List<Order>> selectByCustomerPhone(@Query("customer_phone") String customerPhone);
 
+    @GET("sbsp")
+    Call<List<Order>> selectBySellerPhone(@Query("seller_phone")String sellerPhone);
+
+    @GET("add")
+    Call<ResponseBody> addAssemble(@Query("customer_phone")String customerPhone,@Query("seller_phone") String sellerPhone,@Query("assemble_id")String assembleId,@Query("time")String time,@Query("money")String money,@Query("goods_id")int goodsId,@Query("goods_count")int goodsCount);
+
+    @GET("get")
+    Call<List<Assemble>> getAssemble();
+
+    @GET("get")
+    Call<List<APDO>> getAP(@Query("assemble_id")String assembleId);
 }

@@ -39,6 +39,8 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
     private ShoppingCartAdapter adapter;
     private List<ShoppingCartInfo> list = new ArrayList<>();
     private List<GoodsInfo2> list2 = new ArrayList<>();
+    private List<ShoppingCartInfo> list1 = new ArrayList<>();
+    private List<GoodsInfo2> list21 = new ArrayList<>();
     private IntentFilter filter;
     private SCReciever scReciever;
 
@@ -84,7 +86,11 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
         goodsInfo2.setGoodsName(goodsAllInfo.getData().getGoodsName());
         goodsInfo2.setGoodsId(goodsAllInfo.getData().getGoodsId());
         list2.add(goodsInfo2);
-        adapter = new ShoppingCartAdapter(list2,list,getContext());
+        list1.clear();
+        list21.clear();
+        list1.addAll(list);
+        list21.addAll(list2);
+        adapter = new ShoppingCartAdapter(list21,list1,getContext());
         manager = new LinearLayoutManager(getContext());
         rvShoppingCart.setAdapter(adapter);
         rvShoppingCart.setLayoutManager(manager);

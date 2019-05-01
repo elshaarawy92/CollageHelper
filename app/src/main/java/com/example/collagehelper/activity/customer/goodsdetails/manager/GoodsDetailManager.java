@@ -60,4 +60,19 @@ public class GoodsDetailManager extends BaseManager {
             }
         });
     }
+
+    public void addAssemble(String customerPhone,String sellerPhone,String assembleId,String time,String money,int goodsId,int goodsCount){
+        Call<ResponseBody> call = assembleAsk.addAssemble(customerPhone,sellerPhone,assembleId,time,money,goodsId,goodsCount);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                presenter.addAssembleSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                presenter.addAssembleFailure();
+            }
+        });
+    }
 }

@@ -9,4 +9,6 @@ public interface IGoodsDetailView {
     void addToCartFailure();
     void addOrderSuccess();
     void addOrderFailure();
+    void addAssembleSuccess();
+    void addAssembleFailure();
 }

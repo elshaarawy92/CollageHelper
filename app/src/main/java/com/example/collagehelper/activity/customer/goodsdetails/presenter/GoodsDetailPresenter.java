@@ -48,4 +48,16 @@ public class GoodsDetailPresenter {
     public void addOrderFailure(){
         view.addOrderFailure();
     }
+
+    public void addAssembleSuccess(){
+        view.addAssembleSuccess();
+    }
+
+    public void addAssembleFailure(){
+        view.addAssembleFailure();
+    }
+
+    public void addAssemble(String customerPhone,String sellerPhone,String assembleId,String time,String money,int goodsId,int goodsCount){
+        manager.addAssemble(customerPhone,sellerPhone,assembleId,time,money,goodsId,goodsCount);
+    }
 }
