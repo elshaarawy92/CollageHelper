@@ -82,7 +82,7 @@ public class OrderActivity extends BaseActivity implements IOrderView{
         bList11.clear();
         bList21.clear();
         bList11.addAll(bList1);
-        bList21.addAll(bList21);
+        bList21.addAll(bList2);
         adapter = new OrderAdapter(bList11,bList21,OrderActivity.this);
         manager = new LinearLayoutManager(OrderActivity.this);
         rvOrder.setAdapter(adapter);
