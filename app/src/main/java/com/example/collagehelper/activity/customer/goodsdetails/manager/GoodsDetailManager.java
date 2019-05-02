@@ -2,7 +2,10 @@ package com.example.collagehelper.activity.customer.goodsdetails.manager;
 
 import com.example.collagehelper.activity.customer.goodsdetails.presenter.GoodsDetailPresenter;
 import com.example.collagehelper.base.BaseManager;
+import com.example.collagehelper.bean.CGDO;
 import com.example.collagehelper.bean.GoodsAllInfo;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -72,6 +75,38 @@ public class GoodsDetailManager extends BaseManager {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 presenter.addAssembleFailure();
+            }
+        });
+    }
+
+    public void addCg(String phone,int goodsId){
+        Call<ResponseBody> call = cgAsk.addToCg(phone,goodsId);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                presenter.addCgSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                presenter.addCgFailure();
+            }
+        });
+    }
+
+    public void getCg(String phone){
+        Call<List<CGDO>> call = cgAsk.getFromCg(phone);
+        call.enqueue(new Callback<List<CGDO>>() {
+            @Override
+            public void onResponse(Call<List<CGDO>> call, Response<List<CGDO>> response) {
+                if (response.body() != null){
+                    presenter.getCgSuccess(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CGDO>> call, Throwable t) {
+                presenter.getCgFailure();
             }
         });
     }

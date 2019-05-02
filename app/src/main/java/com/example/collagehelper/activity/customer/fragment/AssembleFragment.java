@@ -81,7 +81,6 @@ public class AssembleFragment extends BaseFragment implements IAssembleView {
             assembleIdList.add(list.get(i).getAssembleId());
         }
         getGoods(iList);
-
     }
 
     private void getGoods(List<Integer> list){

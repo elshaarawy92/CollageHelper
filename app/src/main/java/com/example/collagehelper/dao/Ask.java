@@ -2,6 +2,7 @@ package com.example.collagehelper.dao;
 
 import com.example.collagehelper.bean.APDO;
 import com.example.collagehelper.bean.Assemble;
+import com.example.collagehelper.bean.CGDO;
 import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.GoodsAllInfo;
 import com.example.collagehelper.bean.GoodsInfoFromServer;
@@ -99,4 +100,13 @@ public interface Ask {
 
     @GET("update")
     Call<ResponseBody> updateAPById(@Query("status")String status,@Query("assemble_id")String assembleId,@Query("phone")String phone);
+
+    @GET("add")
+    Call<ResponseBody> addToCg(@Query("phone")String phone,@Query("goods_id")int goodsId);
+
+    @GET("delete")
+    Call<ResponseBody> deleteFromCg(@Query("id")int id);
+
+    @GET("get")
+    Call<List<CGDO>> getFromCg(@Query("phone")String phone);
 }

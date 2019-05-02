@@ -17,6 +17,7 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.assemble.view.AssembleActivity;
 import com.example.collagehelper.activity.customer.main.presenter.Main2Presenter;
 import com.example.collagehelper.activity.customer.main.view.IMainView2;
+import com.example.collagehelper.activity.customer.mycollect.view.MyCollectActivity;
 import com.example.collagehelper.activity.customer.order.view.OrderActivity;
 import com.example.collagehelper.adapter.MyAdapter;
 import com.example.collagehelper.bean.CTSDO;
@@ -77,6 +78,8 @@ public class MyFragment extends BaseFragment implements IMainView2 {
                         startActivity(intent2);
                         break;
                     case 3:
+                        Intent intent3 = new Intent(getContext(),MyCollectActivity.class);
+                        startActivity(intent3);
                         break;
                     case 4:
                         break;

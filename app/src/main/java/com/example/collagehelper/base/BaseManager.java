@@ -58,6 +58,13 @@ public class BaseManager {
             .build();
     public Ask apAsk = retrofit7.create(Ask.class);
 
+    private Retrofit retrofit8 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/cg/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask cgAsk = retrofit8.create(Ask.class);
+
     public RequestBody toRequestBody(String value) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), value);
         return requestBody;

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,6 +64,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         public ImageButton addGoods;
         public ImageButton minusGoods;
         public TextView goodsAccounts;
+        public CheckBox cbSelect;
         View view;
 
         public MyHolder(View itemView) {
@@ -73,6 +75,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             addGoods = itemView.findViewById(R.id.ib_goods_add);
             minusGoods = itemView.findViewById(R.id.ib_goods_minus);
             goodsAccounts = itemView.findViewById(R.id.tv_goods_account);
+            cbSelect = itemView.findViewById(R.id.cb_select);
             view = itemView;
         }
     }
@@ -95,7 +98,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.goodsPrice.setText(goodsInfo2.getGoodsPrice());
         holder.goodsAccounts.setText(list2.get(position).getGoodsCount() + "");
         iAccount = Integer.valueOf(holder.goodsAccounts.getText().toString().trim());
-        id = list2.get(position).getId();
         holder.addGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +119,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 @Override
                 public void onClick(View view) {
                     int pos = holder.getLayoutPosition();
+                    id = list2.get(pos).getId();
                     onItemClickListener.onItemClick(holder.view,pos,goodsInfo2.getGoodsId(),id);
                 }
             });
@@ -124,6 +127,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 @Override
                 public boolean onLongClick(View view) {
                     int pos = holder.getLayoutPosition();
+                    id = list2.get(pos).getId();
                     onItemClickListener.onItemLongClick(holder.view,pos,goodsInfo2.getGoodsId(),id);
                     return false;
                 }

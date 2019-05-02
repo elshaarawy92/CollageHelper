@@ -11,11 +11,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.fragment.presenter.ShoppingCartPresenter;
 import com.example.collagehelper.activity.customer.fragment.view.IShoppingCartView;
@@ -43,18 +47,31 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
     private List<GoodsInfo2> list21 = new ArrayList<>();
     private IntentFilter filter;
     private SCReciever scReciever;
+    private List<Integer> goodsIdList = new ArrayList<>();
+    private TextView tvPrice;
+    private Button btnPay;
 
+    private int i = 0;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_shopping_cart,container,false);
         rvShoppingCart = view.findViewById(R.id.rv_shopping_cart);
+        tvPrice = view.findViewById(R.id.tv_price);
+        tvPrice.setText("0元");
+        btnPay = view.findViewById(R.id.btn_pay);
         presenter = new ShoppingCartPresenter(this);
         filter = new IntentFilter();
         filter.addAction("android.intent.shoppingcartreciever");
         scReciever = new SCReciever();
         getActivity().registerReceiver(scReciever,filter);
         presenter.getFromCart(BaseActivity.phone);
+        proxyOnClickListener(2, btnPay, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         return view;
     }
 
@@ -62,8 +79,14 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
     public void getFromCartSuccess(List<ShoppingCartInfo> info) {
         list = info;
         for (int i = 0;i < list.size();i++){
-            presenter.getGoodsDetail(list.get(i).getGoodsId());
+            goodsIdList.add(info.get(i).getGoodsId());
         }
+        getGoods(goodsIdList);
+    }
+
+    private void getGoods(List<Integer> list){
+        presenter.getGoodsDetail(list.get(i));
+        i++;
     }
 
     @Override
@@ -86,6 +109,10 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
         goodsInfo2.setGoodsName(goodsAllInfo.getData().getGoodsName());
         goodsInfo2.setGoodsId(goodsAllInfo.getData().getGoodsId());
         list2.add(goodsInfo2);
+        if (i != goodsIdList.size()){
+            getGoods(goodsIdList);
+            return;
+        }
         list1.clear();
         list21.clear();
         list1.addAll(list);
@@ -115,6 +142,8 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
                                 presenter.delete(cartId);
                                 list.clear();
                                 list2.clear();
+                                goodsIdList.clear();
+                                i = 0;
                                 presenter.getFromCart(BaseActivity.phone);
                             }
                         });
@@ -152,6 +181,8 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
         super.onDestroyView();
         list.clear();
         list2.clear();
+        goodsIdList.clear();
+        i = 0;
         getActivity().unregisterReceiver(scReciever);
     }
 

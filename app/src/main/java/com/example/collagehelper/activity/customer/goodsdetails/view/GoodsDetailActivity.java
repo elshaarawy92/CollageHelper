@@ -19,10 +19,13 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.goodsdetails.presenter.GoodsDetailPresenter;
 import com.example.collagehelper.activity.customer.sellerdetails.view.SellerDetailsActivity;
 import com.example.collagehelper.base.BaseActivity;
+import com.example.collagehelper.bean.CGDO;
 import com.example.collagehelper.bean.GoodsAllInfo;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailView{
     private Intent intent;
@@ -42,6 +45,9 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
     private ImageView ivShoppingCart;
     private ImageView ivAssemble;
     private ImageView ivPay;
+    private TextView tvCollect;
+    private List<CGDO> list = new ArrayList<>();
+    private boolean exists;
 
     private int price;
 
@@ -57,6 +63,7 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
         initView();
         presenter.getGoodsDetail(id);
         clickEvent();
+        presenter.getCg(phone);
     }
 
     private void initView(){
@@ -71,6 +78,7 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
         ivShoppingCart = findViewById(R.id.iv_detail_shopping_cart);
         ivAssemble = findViewById(R.id.iv_detail_assemble);
         ivPay = findViewById(R.id.iv_detail_buy);
+        tvCollect = findViewById(R.id.tv_collect);
     }
 
     private void clickEvent(){
@@ -80,6 +88,19 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
                 Intent intent = new Intent(GoodsDetailActivity.this,SellerDetailsActivity.class);
                 intent.putExtra("sellerphone",sellerPhone);
                 startActivity(intent);
+            }
+        });
+
+        proxyOnClickListener(2, ivCollect, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (exists){
+                }
+                else {
+                    presenter.addCg(phone,id);
+                    tvCollect.setText("已收藏");
+                    ivCollect.setBackgroundResource(R.drawable.already_collect);
+                }
             }
         });
 
@@ -304,5 +325,31 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
     @Override
     public void addAssembleFailure() {
         Toast.makeText(GoodsDetailActivity.this,"发起拼团失败",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void addCgSuccess() {
+        Toast.makeText(GoodsDetailActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void addCgFailure() {
+        Toast.makeText(GoodsDetailActivity.this,"收藏失败",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getCgSuccess(List<CGDO> list) {
+        for (int i = 0; i < list.size(); i++){
+            if (list.get(i).getGoodsId() == id){
+                tvCollect.setText("已收藏");
+                ivCollect.setBackgroundResource(R.drawable.already_collect);
+                exists = true;
+            }
+        }
+    }
+
+    @Override
+    public void getCgFailure() {
+
     }
 }

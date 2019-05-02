@@ -4,6 +4,31 @@
     android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/rv_shopping_cart"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:textSize="22sp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv_price"
+            android:textColor="#01B468"/>
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_pay"
+            android:background="@drawable/login_button_type"
+            android:text="支付"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"/>
+    </LinearLayout>
 </LinearLayout>
