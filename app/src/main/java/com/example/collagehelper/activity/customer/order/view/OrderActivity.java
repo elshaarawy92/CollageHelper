@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.customer.goodsdetails.view.GoodsDetailActivity;
+import com.example.collagehelper.activity.customer.mycollect.view.MyCollectActivity;
 import com.example.collagehelper.activity.customer.order.presenter.OrderPresenter;
 import com.example.collagehelper.adapter.OrderAdapter;
 import com.example.collagehelper.base.BaseActivity;
@@ -85,6 +88,19 @@ public class OrderActivity extends BaseActivity implements IOrderView{
         bList21.addAll(bList2);
         adapter = new OrderAdapter(bList11,bList21,OrderActivity.this);
         manager = new LinearLayoutManager(OrderActivity.this);
+        adapter.setOnItemClickListener(new OrderAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(OrderActivity.this,GoodsDetailActivity.class);
+                intent.putExtra("id",bList1.get(position).getGoodsId());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
         rvOrder.setAdapter(adapter);
         rvOrder.setLayoutManager(manager);
     }
