@@ -14,11 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.fragment.presenter.AssemblePresenter;
 import com.example.collagehelper.activity.customer.fragment.view.IAssembleView;
 import com.example.collagehelper.adapter.AssembleAdapter;
+import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.base.BaseFragment;
 import com.example.collagehelper.bean.APDO;
 import com.example.collagehelper.bean.Assemble;
@@ -36,7 +38,6 @@ public class AssembleFragment extends BaseFragment implements IAssembleView {
     private List<AssembleAdapterBean> bList1 = new ArrayList<>();
     private List<OrderAdapterBean2> bList2 = new ArrayList<>();
     private List<Integer> iList = new ArrayList<>();
-    AssembleAdapterBean assembleAdapterBean;
     OrderAdapterBean2 orderAdapterBean2;
     private AssembleAdapter adapter;
     private LinearLayoutManager manager;
@@ -45,7 +46,7 @@ public class AssembleFragment extends BaseFragment implements IAssembleView {
     private AssembleReciever reciever;
     private List<String> assembleIdList = new ArrayList<>();
     private int j = 0;
-    private List<Integer> list = new ArrayList<>();
+    private List<Integer> list0 = new ArrayList<>();
     private List<AssembleAdapterBean> bList11 = new ArrayList<>();
     private List<OrderAdapterBean2> bList21 = new ArrayList<>();
     private List<Integer> list1 = new ArrayList<>();
@@ -118,10 +119,10 @@ public class AssembleFragment extends BaseFragment implements IAssembleView {
     }
 
     @Override
-    public void getAPSuccess(List<APDO> list) {
+    public void getAPSuccess(final List<APDO> list) {
         int account;
         account = list.size();
-        this.list.add(account);
+        list0.add(account);
         if (j != bList1.size()){
             getAP(assembleIdList);
             return;
@@ -131,16 +132,53 @@ public class AssembleFragment extends BaseFragment implements IAssembleView {
         list1.clear();
         bList11.addAll(bList1);
         bList21.addAll(bList2);
-        list1.addAll(this.list);
+        list1.addAll(list0);
         adapter = new AssembleAdapter(bList11,bList21,this.list1,getContext());
         manager = new LinearLayoutManager(getContext());
         rvAssemble.setAdapter(adapter);
         rvAssemble.setLayoutManager(manager);
+        adapter.setOnItemClickListener(new AssembleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                if (list0.get(position) == 3){
+                    Toast.makeText(getContext(),"人数已满",Toast.LENGTH_SHORT).show();
+                }else if (list0.get(position) == 2){
+                    presenter.joinAssemble(assembleIdList.get(position),BaseActivity.phone);
+                    Intent intent = new Intent();
+                    intent.setAction("android.intent.assemblefinish");
+                    intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+                    getActivity().sendBroadcast(intent);
+                } else {
+                    presenter.joinAssemble(assembleIdList.get(position),BaseActivity.phone);
+                }
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
     }
 
     @Override
     public void getAPFailure() {
 
+    }
+
+    @Override
+    public void joinSuccess() {
+        Toast.makeText(getContext(),"参加拼团成功",Toast.LENGTH_SHORT).show();
+        refresh();
+    }
+
+    @Override
+    public void alreadyJoin() {
+        Toast.makeText(getContext(),"已参加过拼团",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void joinFailure() {
+        Toast.makeText(getContext(),"参加拼团失败",Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -150,8 +188,9 @@ public class AssembleFragment extends BaseFragment implements IAssembleView {
         bList2.clear();
         iList.clear();
         assembleIdList.clear();
-        list.clear();
+        list0.clear();
         i = 0;
+        j = 0;
         rvAssemble.setAdapter(null);
         getActivity().unregisterReceiver(reciever);
     }
@@ -163,7 +202,7 @@ public class AssembleFragment extends BaseFragment implements IAssembleView {
         bList2.clear();
         iList.clear();
         assembleIdList.clear();
-        list.clear();
+        list0.clear();
         i = 0;
         j = 0;
     }
@@ -174,7 +213,7 @@ public class AssembleFragment extends BaseFragment implements IAssembleView {
         bList2.clear();
         iList.clear();
         assembleIdList.clear();
-        list.clear();
+        list0.clear();
         i = 0;
         presenter.getAssemble();
         j = 0;

@@ -58,7 +58,18 @@
         <activity android:name=".activity.customer.searchgoodsbyname.view.SearchGoodsByNameActivity" />
         <activity android:name=".activity.customer.goodsdetails.view.GoodsDetailActivity" />
         <activity android:name=".activity.customer.sellerdetails.view.SellerDetailsActivity" />
-        <activity android:name=".activity.customer.order.view.OrderActivity"></activity>
+        <activity android:name=".activity.customer.order.view.OrderActivity" />
+        <activity android:name=".activity.customer.assemble.view.AssembleActivity"></activity>
+        <receiver android:name=".reciever.AssembleFinishReciver">
+            <intent-filter>
+                <action android:name="android.intent.assemblefinish"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".reciever.NewOrderReceiver">
+            <intent-filter>
+                <action android:name="android.intent.neworder"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

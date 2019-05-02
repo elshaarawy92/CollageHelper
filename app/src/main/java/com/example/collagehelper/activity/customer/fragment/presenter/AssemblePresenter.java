@@ -52,4 +52,20 @@ public class AssemblePresenter {
     public void getAp(String assembleId){
         manager.getAP(assembleId);
     }
+
+    public void joinSuccess(){
+        view.joinSuccess();
+    }
+
+    public void joinFailure(){
+        view.joinFailure();
+    }
+
+    public void alreadyJoin(){
+        view.alreadyJoin();
+    }
+
+    public void joinAssemble(String assembleId,String phone){
+        manager.joinAssemble(assembleId,phone);
+    }
 }

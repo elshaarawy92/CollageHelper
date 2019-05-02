@@ -1,6 +1,13 @@
 package com.example.collagehelper.base;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.customer.assemble.view.AssembleActivity;
 
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -39,6 +47,7 @@ public class BaseActivity extends AppCompatActivity {
     private TextView tittle;
     private FrameLayout fContent;
     private static boolean isExit = false;
+    public static int how;
 
     public static String phone;
 
@@ -184,5 +193,4 @@ public class BaseActivity extends AppCompatActivity {
     public void hideRightImage(){
         ibRight.setVisibility(View.GONE);
     }
-
 }

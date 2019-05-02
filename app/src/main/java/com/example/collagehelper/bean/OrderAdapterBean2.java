@@ -4,6 +4,7 @@ public class OrderAdapterBean2 {
     private String img;
     private String name;
     private String price;
+    private String sellerPhone;
 
     public String getImg() {
         return img;
@@ -27,6 +28,14 @@ public class OrderAdapterBean2 {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getSellerPhone() {
+        return sellerPhone;
+    }
+
+    public void setSellerPhone(String sellerPhone) {
+        this.sellerPhone = sellerPhone;
     }
 
     @Override

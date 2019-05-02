@@ -63,4 +63,23 @@ public class AssembleManager extends BaseManager {
             }
         });
     }
+
+    public void joinAssemble(String assembleId,String phone){
+        Call<Boolean> call = apAsk.joinAssemble(assembleId,phone);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.body()){
+                    presenter.alreadyJoin();
+                }else {
+                    presenter.joinSuccess();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                presenter.joinFailure();
+            }
+        });
+    }
 }

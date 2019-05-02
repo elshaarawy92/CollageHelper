@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.customer.assemble.view.AssembleActivity;
 import com.example.collagehelper.activity.customer.main.presenter.Main2Presenter;
 import com.example.collagehelper.activity.customer.main.view.IMainView2;
 import com.example.collagehelper.activity.customer.order.view.OrderActivity;
@@ -68,10 +69,12 @@ public class MyFragment extends BaseFragment implements IMainView2 {
                     case 0:
                         break;
                     case 1:
+                        Intent intent = new Intent(getContext(),AssembleActivity.class);
+                        startActivity(intent);
                         break;
                     case 2:
-                        Intent intent = new Intent(getContext(),OrderActivity.class);
-                        startActivity(intent);
+                        Intent intent2 = new Intent(getContext(),OrderActivity.class);
+                        startActivity(intent2);
                         break;
                     case 3:
                         break;
@@ -93,7 +96,7 @@ public class MyFragment extends BaseFragment implements IMainView2 {
         list.add(new Function(R.drawable.customer_manage,"商家管理"));
         list.add(new Function(R.drawable.thing_manage,"拼单管理"));
         list.add(new Function(R.drawable.form_manage,"订单管理"));
-        list.add(new Function(R.drawable.statistics_manage,"好友管理"));
+        list.add(new Function(R.drawable.statistics_manage,"我的收藏"));
         list.add(new Function(R.drawable.head_setting,"个人设置"));
     }
 

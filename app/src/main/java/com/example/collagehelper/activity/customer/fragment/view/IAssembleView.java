@@ -13,4 +13,7 @@ public interface IAssembleView {
     void getGoodsFailure();
     void getAPSuccess(List<APDO> list);
     void getAPFailure();
+    void joinSuccess();
+    void alreadyJoin();
+    void joinFailure();
 }

@@ -87,4 +87,16 @@ public interface Ask {
 
     @GET("get")
     Call<List<APDO>> getAP(@Query("assemble_id")String assembleId);
+
+    @GET("add")
+    Call<Boolean> joinAssemble(@Query("assemble_id")String assembleId,@Query("phone")String phone);
+
+    @GET("get_by_phone")
+    Call<List<APDO>> getByPhone(@Query("phone")String phone);
+
+    @GET("get_by_aid")
+    Call<List<Assemble>> getByAssembleId(@Query("assemble_id")String assembleId);
+
+    @GET("update")
+    Call<ResponseBody> updateAPById(@Query("status")String status,@Query("assemble_id")String assembleId,@Query("phone")String phone);
 }

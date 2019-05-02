@@ -234,6 +234,10 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
                         String money = price * count + "";
                         presenter.addOrder(BaseActivity.phone,sellerPhone,orderId,time,money,id,count);
                         dialog.dismiss();
+                        Intent intent = new Intent();
+                        intent.setAction("android.intent.neworder");
+                        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+                        sendBroadcast(intent);
                     }
                 });
             }

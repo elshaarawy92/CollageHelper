@@ -80,7 +80,9 @@ public class LoginActivity extends BaseActivity implements ILoginView {
                 String type;
                 if (rbCustomer.isChecked()){
                     type = "0";
+                    how = 0;
                 }else {
+                    how = 1;
                     type = "1";
                 }
                 loginPresenter.login(phone,pwd,type);
