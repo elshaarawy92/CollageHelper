@@ -72,7 +72,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.customer.mycollect.view.MyCollectActivity"></activity>
+        <activity android:name=".activity.customer.mycollect.view.MyCollectActivity" />
+        <activity android:name=".activity.customer.contactseller.view.ContactSellerActivity" />
+        <activity android:name=".activity.seller.contactcustomer.view.ContactCustomerActivity" />
+        <activity android:name=".activity.customer.comment.view.CommentActivity" />
+        <activity android:name=".activity.customer.goodsstatus.view.GoodsStatusActivity"></activity>
     </application>
 
 </manifest>

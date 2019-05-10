@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.customer.comment.view.CommentActivity;
 import com.example.collagehelper.activity.customer.goodsdetails.presenter.GoodsDetailPresenter;
 import com.example.collagehelper.activity.customer.sellerdetails.view.SellerDetailsActivity;
 import com.example.collagehelper.base.BaseActivity;
@@ -23,7 +24,6 @@ import com.example.collagehelper.bean.CGDO;
 import com.example.collagehelper.bean.GoodsAllInfo;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +46,6 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
     private ImageView ivAssemble;
     private ImageView ivPay;
     private TextView tvCollect;
-    private List<CGDO> list = new ArrayList<>();
     private boolean exists;
 
     private int price;
@@ -101,6 +100,15 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
                     tvCollect.setText("已收藏");
                     ivCollect.setBackgroundResource(R.drawable.already_collect);
                 }
+            }
+        });
+
+        proxyOnClickListener(2, ivComment, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GoodsDetailActivity.this,CommentActivity.class);
+                intent.putExtra("goods_id",id);
+                startActivity(intent);
             }
         });
 
@@ -253,7 +261,7 @@ public class GoodsDetailActivity extends BaseActivity implements IGoodsDetailVie
                         String orderId = time2 + BaseActivity.phone;
                         int count = Integer.valueOf(tvDGoodsCount.getText().toString().trim());
                         String money = price * count + "";
-                        presenter.addOrder(BaseActivity.phone,sellerPhone,orderId,time,money,id,count);
+                        presenter.addOrder(BaseActivity.phone,sellerPhone,orderId,time,money,id,count,"待发货");
                         dialog.dismiss();
                         Intent intent = new Intent();
                         intent.setAction("android.intent.neworder");

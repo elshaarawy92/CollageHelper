@@ -3,9 +3,11 @@ package com.example.collagehelper.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.example.collagehelper.bean.OrderAdapterBean1;
 import com.example.collagehelper.bean.OrderAdapterBean2;
 import com.example.collagehelper.bean.OrderAdapterBean3;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FormAdapter extends RecyclerView.Adapter<FormAdapter.MyViewHolder> {
@@ -29,6 +32,7 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.MyViewHolder> 
     public interface OnItemClickListener{
         void onItemClick(View view, int position);
         void onItemLongClick(View view, int position);
+        void onButtonClick(View view,int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -63,6 +67,24 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.MyViewHolder> 
         holder.tvOrderTotal.setText("总计:" + order3.getTotal() + "元");
         holder.tvOrderTime.setText("时间:" + order3.getTime());
         holder.tvCustomer.setText("顾客:" + order3.getCustomerPhone());
+        holder.tvOrderStatus.setText(order3.getStatus());
+        int p = holder.getLayoutPosition();
+        if (list3.get(p).getStatus().equals("待发货")){
+            holder.tvOrderStatus.setVisibility(View.GONE);
+            holder.btnConfirmSend.setVisibility(View.VISIBLE);
+            if (onItemClickListener != null){
+                holder.btnConfirmSend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = holder.getLayoutPosition();
+                        onItemClickListener.onButtonClick(holder.btnConfirmSend,pos);
+                    }
+                });
+            }
+        }else {
+            holder.tvOrderStatus.setVisibility(View.VISIBLE);
+            holder.btnConfirmSend.setVisibility(View.GONE);
+        }
         if (onItemClickListener != null){
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,6 +119,8 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.MyViewHolder> 
         TextView tvOrderTotal;
         TextView tvCustomer;
         TextView tvOrderTime;
+        TextView tvOrderStatus;
+        Button btnConfirmSend;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -108,6 +132,8 @@ public class FormAdapter extends RecyclerView.Adapter<FormAdapter.MyViewHolder> 
             tvOrderTotal = itemView.findViewById(R.id.tv_order_total);
             tvCustomer = itemView.findViewById(R.id.tv_customer);
             tvOrderTime = itemView.findViewById(R.id.tv_order_time);
+            tvOrderStatus = itemView.findViewById(R.id.tv_order_status2);
+            btnConfirmSend = itemView.findViewById(R.id.btn_confirm_send);
         }
     }
 }

@@ -165,7 +165,7 @@ public class AssembleActivity extends BaseActivity implements IAssembleView {
                                 SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMddHHmmss");
                                 String time2 = df2.format(new Date());
                                 String orderId = time2 + BaseActivity.phone;
-                                presenter.addOrder(phone,sellerPhone.get(position),orderId,time,String.valueOf(Integer.valueOf(money.get(position)) * 85 / 100),goodsIdList.get(position),goodsCount.get(position));
+                                presenter.addOrder(phone,sellerPhone.get(position),orderId,time,String.valueOf(Integer.valueOf(money.get(position)) * 85 / 100),goodsIdList.get(position),goodsCount.get(position),"待发货");
                                 refresh();
                                 Intent intent = new Intent();
                                 intent.setAction("android.intent.neworder");

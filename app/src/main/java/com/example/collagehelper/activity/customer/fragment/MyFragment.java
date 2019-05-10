@@ -9,12 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
+import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.assemble.view.AssembleActivity;
+import com.example.collagehelper.activity.customer.goodsstatus.view.GoodsStatusActivity;
 import com.example.collagehelper.activity.customer.main.presenter.Main2Presenter;
 import com.example.collagehelper.activity.customer.main.view.IMainView2;
 import com.example.collagehelper.activity.customer.mycollect.view.MyCollectActivity;
@@ -38,6 +41,9 @@ public class MyFragment extends BaseFragment implements IMainView2 {
     private LinearLayoutManager manager;
     private CircleImageView civHead;
     private TextView tvHead;
+    private ImageView ivWaitSendGoods;
+    private ImageView ivWaitReceiveGoods;
+    private ImageView ivWaitComment;
 
     private String phone;
     private Main2Presenter presenter;
@@ -51,6 +57,9 @@ public class MyFragment extends BaseFragment implements IMainView2 {
         recyclerView = view.findViewById(R.id.my_recyclerview);
         civHead = view.findViewById(R.id.civ_head);
         tvHead = view.findViewById(R.id.tv_username);
+        ivWaitSendGoods = view.findViewById(R.id.iv_wait_send_goods);
+        ivWaitReceiveGoods = view.findViewById(R.id.iv_wait_receive_goods);
+        ivWaitComment = view.findViewById(R.id.iv_wait_comment);
         adapter = new MyAdapter(list);
         manager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(adapter);
@@ -63,6 +72,33 @@ public class MyFragment extends BaseFragment implements IMainView2 {
     }
 
     private void ClickEvent() {
+        proxyOnClickListener(2, ivWaitSendGoods, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),GoodsStatusActivity.class);
+                intent.putExtra("status","待发货");
+                startActivity(intent);
+            }
+        });
+
+        proxyOnClickListener(2, ivWaitReceiveGoods, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),GoodsStatusActivity.class);
+                intent.putExtra("status","待收货");
+                startActivity(intent);
+            }
+        });
+
+        proxyOnClickListener(2, ivWaitComment, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),GoodsStatusActivity.class);
+                intent.putExtra("status","待评价");
+                startActivity(intent);
+            }
+        });
+
         adapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

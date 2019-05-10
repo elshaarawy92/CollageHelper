@@ -6,8 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.customer.comment.view.CommentActivity;
 import com.example.collagehelper.activity.customer.goodsdetails.view.GoodsDetailActivity;
 import com.example.collagehelper.activity.customer.mycollect.view.MyCollectActivity;
 import com.example.collagehelper.activity.customer.order.presenter.OrderPresenter;
@@ -30,6 +32,7 @@ public class OrderActivity extends BaseActivity implements IOrderView{
     private List<OrderAdapterBean1> bList11 = new ArrayList<>();
     private List<OrderAdapterBean2> bList21 = new ArrayList<>();
     private List<Integer> iList = new ArrayList<>();
+    private List<String> orderIdList = new ArrayList<>();
     OrderAdapterBean1 orderAdapterBean1;
     OrderAdapterBean2 orderAdapterBean2;
     private OrderAdapter adapter;
@@ -56,6 +59,8 @@ public class OrderActivity extends BaseActivity implements IOrderView{
             orderAdapterBean1.setTime(list.get(i).getTime());
             orderAdapterBean1.setTotal(list.get(i).getMoney());
             orderAdapterBean1.setGoodsId(list.get(i).getGoodsId());
+            orderAdapterBean1.setStatus(list.get(i).getStatus());
+            orderIdList.add(list.get(i).getOrderId());
             bList1.add(orderAdapterBean1);
             iList.add(list.get(i).getGoodsId());
         }
@@ -100,6 +105,19 @@ public class OrderActivity extends BaseActivity implements IOrderView{
             public void onItemLongClick(View view, int position) {
 
             }
+
+            @Override
+            public void onReceiveClick(View view, int position) {
+                presenter.updateByOrderId(orderIdList.get(position),"待评价");
+            }
+
+            @Override
+            public void onCommentClick(View view, int position) {
+                Intent intent = new Intent(OrderActivity.this,CommentActivity.class);
+                intent.putExtra("goods_id",iList.get(position));
+                startActivity(intent);
+                presenter.updateByOrderId(orderIdList.get(position),"订单已完成");
+            }
         });
         rvOrder.setAdapter(adapter);
         rvOrder.setLayoutManager(manager);
@@ -111,11 +129,27 @@ public class OrderActivity extends BaseActivity implements IOrderView{
     }
 
     @Override
+    public void updateSuccess() {
+        Toast.makeText(OrderActivity.this,"确认收货成功",Toast.LENGTH_SHORT).show();
+        refresh();
+    }
+
+    private void refresh(){
+        bList1.clear();
+        bList2.clear();
+        iList.clear();
+        orderIdList.clear();
+        i = 0;
+        presenter.getOrder(BaseActivity.phone);
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         bList1.clear();
         bList2.clear();
         iList.clear();
+        orderIdList.clear();
         rvOrder.setAdapter(null);
     }
 
@@ -132,6 +166,8 @@ public class OrderActivity extends BaseActivity implements IOrderView{
         bList1.clear();
         bList2.clear();
         iList.clear();
+        orderIdList.clear();
+        i = 0;
         rvOrder.setAdapter(null);
     }
 }

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,10 +16,10 @@ import com.example.collagehelper.R;
 import com.example.collagehelper.bean.OrderAdapterBean1;
 import com.example.collagehelper.bean.OrderAdapterBean2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder> {
-
     private List<OrderAdapterBean1> list1;
     private List<OrderAdapterBean2> list2;
     private Context context;
@@ -28,6 +29,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
     public interface OnItemClickListener{
         void onItemClick(View view, int position);
         void onItemLongClick(View view, int position);
+        void onReceiveClick(View view,int position);
+        void onCommentClick(View view, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -61,6 +64,35 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         holder.tvOrderAccount.setText("数量:" + order1.getAccount());
         holder.tvOrderTotal.setText("总计:" + order1.getTotal() + "元");
         holder.tvOrderTime.setText("时间:" + order1.getTime());
+        holder.tvOrderStatus.setText(order1.getStatus());
+        int p = holder.getLayoutPosition();
+        if (list1.get(p).getStatus().equals("待收货")){
+            holder.tvOrderStatus.setVisibility(View.GONE);
+            holder.btnConfirmReceive.setVisibility(View.VISIBLE);
+            holder.btnConfirmReceive.setText("确认收货");
+            if (onItemClickListener != null){
+                holder.btnConfirmReceive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = holder.getLayoutPosition();
+                        onItemClickListener.onReceiveClick(holder.btnConfirmReceive,pos);
+                    }
+                });
+            }
+        }else if (list1.get(p).getStatus().equals("待评价")){
+            holder.tvOrderStatus.setVisibility(View.GONE);
+            holder.btnConfirmReceive.setVisibility(View.VISIBLE);
+            holder.btnConfirmReceive.setText("去评价");
+            if (onItemClickListener != null){
+                holder.btnConfirmReceive.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int pos = holder.getLayoutPosition();
+                        onItemClickListener.onCommentClick(holder.btnConfirmReceive,pos);
+                    }
+                });
+            }
+        }
         if (onItemClickListener != null){
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,6 +126,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
         TextView tvOrderAccount;
         TextView tvOrderTotal;
         TextView tvOrderTime;
+        TextView tvOrderStatus;
+        Button btnConfirmReceive;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -104,6 +138,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.MyViewHolder
             tvOrderAccount = itemView.findViewById(R.id.tv_order_account);
             tvOrderTotal = itemView.findViewById(R.id.tv_order_total);
             tvOrderTime = itemView.findViewById(R.id.tv_order_time);
+            tvOrderStatus = itemView.findViewById(R.id.tv_order_status);
+            btnConfirmReceive = itemView.findViewById(R.id.btn_confirm_receive);
         }
     }
 }

@@ -77,8 +77,8 @@ public class AssemblePresenter {
         manager.updateApById(assembleId,phone,status);
     }
 
-    public void addOrder(String customerPhone,String sellerPhone,String orderId,String time,String money,int goodsId,int goodsCount){
-        manager.addOrder(customerPhone,sellerPhone,orderId,time,money,goodsId,goodsCount);
+    public void addOrder(String customerPhone,String sellerPhone,String orderId,String time,String money,int goodsId,int goodsCount,String status){
+        manager.addOrder(customerPhone,sellerPhone,orderId,time,money,goodsId,goodsCount,status);
     }
 
     public void addOrderSuccess(){

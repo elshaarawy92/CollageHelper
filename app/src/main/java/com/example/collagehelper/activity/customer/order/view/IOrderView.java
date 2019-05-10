@@ -10,4 +10,5 @@ public interface IOrderView {
     void getOrderFailure();
     void getGoodsSuccess(GoodsAllInfo goodsAllInfo);
     void getGoodsFailure();
+    void updateSuccess();
 }

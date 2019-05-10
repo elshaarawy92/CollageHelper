@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
@@ -53,6 +54,7 @@ public class FormFragment extends BaseFragment implements IFormView {
     private FormAdapter adapter;
     private LinearLayoutManager manager;
     private LinearLayoutManager manager2;
+    private List<String> orderIdList = new ArrayList<>();
     private int i = 0;
 
     @Nullable
@@ -105,6 +107,8 @@ public class FormFragment extends BaseFragment implements IFormView {
             orderAdapterBean3.setTotal(list.get(i).getMoney());
             orderAdapterBean3.setGoodsId(list.get(i).getGoodsId());
             orderAdapterBean3.setCustomerPhone(list.get(i).getCustomerPhone());
+            orderAdapterBean3.setStatus(list.get(i).getStatus());
+            orderIdList.add(list.get(i).getOrderId());
             list3.add(orderAdapterBean3);
             integerList.add(list.get(i).getGoodsId());
         }
@@ -137,6 +141,22 @@ public class FormFragment extends BaseFragment implements IFormView {
         list31.addAll(list3);
         list21.addAll(list2);
         adapter = new FormAdapter(list31,list21,getContext());
+        adapter.setOnItemClickListener(new FormAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+
+            @Override
+            public void onButtonClick(View view, int position) {
+                presenter.updateByOrderId(orderIdList.get(position),"待收货");
+            }
+        });
         manager = new LinearLayoutManager(getContext());
         manager2 = new LinearLayoutManager(getContext());
         rvForm.setAdapter(adapter);
@@ -151,22 +171,34 @@ public class FormFragment extends BaseFragment implements IFormView {
     }
 
     @Override
+    public void updateSuccess() {
+        Toast.makeText(getContext(),"发货成功",Toast.LENGTH_SHORT).show();
+        refresh();
+    }
+
+    private void refresh(){
+        list3.clear();
+        list2.clear();
+        integerList.clear();
+        orderIdList.clear();
+        i = 0;
+        presenter.getForm(BaseActivity.phone);
+    }
+
+    @Override
+    public void updateFailure() {
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         list3.clear();
         list2.clear();
         integerList.clear();
+        orderIdList.clear();
         i = 0;
         rvForm.setAdapter(null);
         rvForm2.setAdapter(null);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        list3.clear();
-        list2.clear();
-        integerList.clear();
-        i = 0;
     }
 }

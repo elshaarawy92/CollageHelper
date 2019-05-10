@@ -49,8 +49,8 @@ public class GoodsDetailManager extends BaseManager {
         });
     }
 
-    public void addOrder(String customerPhone,String sellerPhone,String orderId,String time,String money,int goodsId,int goodsCount){
-        Call<ResponseBody> call = orderAsk.addOrder(customerPhone,sellerPhone,orderId,time,money,goodsId,goodsCount);
+    public void addOrder(String customerPhone,String sellerPhone,String orderId,String time,String money,int goodsId,int goodsCount,String status){
+        Call<ResponseBody> call = orderAsk.addOrder(customerPhone,sellerPhone,orderId,time,money,goodsId,goodsCount,status);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

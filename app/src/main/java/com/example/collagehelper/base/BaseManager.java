@@ -65,6 +65,27 @@ public class BaseManager {
             .build();
     public Ask cgAsk = retrofit8.create(Ask.class);
 
+    private Retrofit retrofit9 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/chat/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask chatAsk = retrofit9.create(Ask.class);
+
+    private Retrofit retrofit10 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/comment/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask commentAsk = retrofit10.create(Ask.class);
+
+    private Retrofit retrofit11 = new Retrofit.Builder()
+            .baseUrl("http://192.168.43.88:8080/coc/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .build();
+    public Ask cocAsk = retrofit11.create(Ask.class);
+
     public RequestBody toRequestBody(String value) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), value);
         return requestBody;

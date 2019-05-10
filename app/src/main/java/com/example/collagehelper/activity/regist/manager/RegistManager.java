@@ -26,7 +26,6 @@ public class RegistManager extends BaseManager {
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                Log.d("onClick", "onResponse: ");
                 label = true;
             }
 

@@ -10,4 +10,6 @@ public interface IFormView {
     void getOrderFailure();
     void getGoodsSuccess(GoodsAllInfo goodsAllInfo);
     void getGoodsFailure();
+    void updateSuccess();
+    void updateFailure();
 }

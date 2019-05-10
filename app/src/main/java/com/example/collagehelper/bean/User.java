@@ -66,7 +66,16 @@ public class User {
         public void setHead(String head) {
             this.head = head;
         }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "phone='" + phone + '\'' +
+                    ", name='" + name + '\'' +
+                    ", password='" + password + '\'' +
+                    ", type='" + type + '\'' +
+                    ", head='" + head + '\'' +
+                    '}';
+        }
     }
-
-
 }

@@ -13,6 +13,7 @@ public class Order {
     private String money;
     private int goodsId;
     private int goodsCount;
+    private String status;
 
     public int getId() {
         return id;
@@ -76,5 +77,13 @@ public class Order {
 
     public void setGoodsCount(int goodsCount) {
         this.goodsCount = goodsCount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

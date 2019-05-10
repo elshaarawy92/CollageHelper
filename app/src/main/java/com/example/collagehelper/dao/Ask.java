@@ -3,7 +3,10 @@ package com.example.collagehelper.dao;
 import com.example.collagehelper.bean.APDO;
 import com.example.collagehelper.bean.Assemble;
 import com.example.collagehelper.bean.CGDO;
+import com.example.collagehelper.bean.COC;
 import com.example.collagehelper.bean.CTSDO;
+import com.example.collagehelper.bean.ChatDO;
+import com.example.collagehelper.bean.Comment;
 import com.example.collagehelper.bean.GoodsAllInfo;
 import com.example.collagehelper.bean.GoodsInfoFromServer;
 import com.example.collagehelper.bean.Order;
@@ -72,13 +75,22 @@ public interface Ask {
     Call<ResponseBody> delete(@Query("id") int id);
 
     @GET("add")
-    Call<ResponseBody> addOrder(@Query("customer_phone")String customerPhone,@Query("seller_phone") String sellerPhone,@Query("order_id")String orderId,@Query("time")String time,@Query("money")String money,@Query("goods_id")int goodsId,@Query("goods_count")int goodsCount);
+    Call<ResponseBody> addOrder(@Query("customer_phone")String customerPhone,@Query("seller_phone") String sellerPhone,@Query("order_id")String orderId,@Query("time")String time,@Query("money")String money,@Query("goods_id")int goodsId,@Query("goods_count")int goodsCount,@Query("status")String status);
 
     @GET("sbcp")
     Call<List<Order>> selectByCustomerPhone(@Query("customer_phone") String customerPhone);
 
     @GET("sbsp")
     Call<List<Order>> selectBySellerPhone(@Query("seller_phone")String sellerPhone);
+
+    @GET("sbcs")
+    Call<List<Order>> selectByCustomerStatus(@Query("status")String status,@Query("customer_phone")String customerPhone);
+
+    @GET("sbss")
+    Call<List<Order>> selectBySellerStatus(@Query("status")String status);
+
+    @GET("update")
+    Call<ResponseBody> updateByOrderId(@Query("order_id")String orderId,@Query("status")String status);
 
     @GET("add")
     Call<ResponseBody> addAssemble(@Query("customer_phone")String customerPhone,@Query("seller_phone") String sellerPhone,@Query("assemble_id")String assembleId,@Query("time")String time,@Query("money")String money,@Query("goods_id")int goodsId,@Query("goods_count")int goodsCount);
@@ -109,4 +121,28 @@ public interface Ask {
 
     @GET("get")
     Call<List<CGDO>> getFromCg(@Query("phone")String phone);
+
+    @GET("add")
+    Call<ResponseBody> addToChat(@Query("customer_phone")String customerPhone,@Query("seller_phone")String sellerPhone,@Query("message")String message,@Query("time")String time,@Query("start")String start);
+
+    @GET("get")
+    Call<List<ChatDO>> getFromChat(@Query("customer_phone")String customerPhone,@Query("seller_phone")String sellerPhone);
+
+    @GET("get_cphone")
+    Call<List<ChatDO>> getFromChatByCPhone(@Query("customer_phone")String customerPhone);
+
+    @GET("get_sphone")
+    Call<List<ChatDO>> getFromChatBySPhone(@Query("seller_phone")String sellerPhone);
+
+    @GET("get")
+    Call<List<Comment>> getFromComment(@Query("goods_id")int goodsId);
+
+    @GET("add")
+    Call<ResponseBody> addToComment(@Query("comment")String comment,@Query("phone")String phone,@Query("goods_id")int goodsId,@Query("time")String time);
+
+    @GET("get")
+    Call<List<COC>> getFromCOC(@Query("comment_id")int commentId);
+
+    @GET("add")
+    Call<ResponseBody> addToCOC(@Query("comment_id")int commentId,@Query("comment")String comment,@Query("time")String time,@Query("phone")String phone);
 }

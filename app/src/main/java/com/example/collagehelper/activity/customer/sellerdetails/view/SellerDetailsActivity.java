@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
+import com.example.collagehelper.activity.customer.contactseller.view.ContactSellerActivity;
 import com.example.collagehelper.activity.customer.goodsdetails.view.GoodsDetailActivity;
 import com.example.collagehelper.activity.customer.sellerdetails.presenter.SellerDetailsPresenter;
 import com.example.collagehelper.adapter.GoodsByNameAdapter;
@@ -69,7 +69,9 @@ public class SellerDetailsActivity extends BaseActivity implements ISellerDetail
         proxyOnClickListener(2, btnContactSeller, new MyClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO 联系店家
+                Intent intent = new Intent(SellerDetailsActivity.this,ContactSellerActivity.class);
+                intent.putExtra("sellerphone",sellerPhone);
+                startActivity(intent);
             }
         });
 

@@ -39,4 +39,12 @@ public class OrderPresenter {
     public void getGoodsFailure(){
         view.getOrderFailure();
     }
+
+    public void updateSuccess(){
+        view.updateSuccess();
+    }
+
+    public void updateByOrderId(String orderId,String status){
+        manager.updateByOrderId(orderId, status);
+    }
 }

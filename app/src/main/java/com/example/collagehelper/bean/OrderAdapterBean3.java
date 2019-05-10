@@ -7,6 +7,8 @@ public class OrderAdapterBean3 {
     private String total;
     private String time;
     private String customerPhone;
+    private String status;
+    private String orderId;
 
     public int getId() {
         return id;
@@ -54,5 +56,21 @@ public class OrderAdapterBean3 {
 
     public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }
