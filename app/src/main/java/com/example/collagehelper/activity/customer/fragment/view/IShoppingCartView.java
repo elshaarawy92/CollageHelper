@@ -13,4 +13,6 @@ public interface IShoppingCartView {
     void getGoodsFailure();
     void deleteSuccess();
     void deleteFailure();
+    void addOrderSuccess();
+    void addOrderFailure();
 }

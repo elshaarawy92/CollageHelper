@@ -31,9 +31,12 @@ import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.base.BaseFragment;
 import com.example.collagehelper.bean.GoodsAllInfo;
 import com.example.collagehelper.bean.GoodsInfo2;
+import com.example.collagehelper.bean.SCOrder;
 import com.example.collagehelper.bean.ShoppingCartInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ShoppingCartFragment extends BaseFragment implements IShoppingCartView {
@@ -50,6 +53,8 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
     private List<Integer> goodsIdList = new ArrayList<>();
     private TextView tvPrice;
     private Button btnPay;
+    private int totalMoney = 0;
+    private List<SCOrder> scList = new ArrayList<>();
 
     private int i = 0;
     @Nullable
@@ -69,7 +74,22 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
         proxyOnClickListener(2, btnPay, new MyClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (scList.size() == 0){
+                    Toast.makeText(getContext(),"请先选择要支付的商品",Toast.LENGTH_SHORT).show();
+                }else {
+                    for (int i = 0; i < scList.size(); i++){
+                        presenter.addOrder(scList.get(i).getCustomerPhone(),scList.get(i).getSellerPhone(),scList.get(i).getOrderId(),scList.get(i).getTime(),scList.get(i).getMoney(),scList.get(i).getGoodsId(),scList.get(i).getGoodsCount(),scList.get(i).getStatus());
+                        presenter.delete(scList.get(i).getScId());
+                    }
+                    list.clear();
+                    list2.clear();
+                    goodsIdList.clear();
+                    scList.clear();
+                    totalMoney = 0;
+                    tvPrice.setText("0元");
+                    i = 0;
+                    presenter.getFromCart(BaseActivity.phone);
+                }
             }
         });
         return view;
@@ -91,7 +111,13 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
 
     @Override
     public void getFromCartNull() {
-
+            list1.clear();
+            list21.clear();
+            list1.addAll(list);
+            list21.addAll(list2);
+            adapter = new ShoppingCartAdapter(list21,list1,getContext());
+            rvShoppingCart.setAdapter(adapter);
+            return;
     }
 
     @Override
@@ -158,6 +184,45 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
                 });
                 builder.show();
             }
+
+            @Override
+            public void onCheckBoxClick(View view, int position, boolean isChecked, int total,String sellerPhone,int goodsId,int goodsCount,int scId) {
+                if (isChecked){
+                    totalMoney = totalMoney + total;
+                    tvPrice.setText(totalMoney + "元");
+                    SCOrder scOrder = new SCOrder();
+                    scOrder.setCustomerPhone(BaseActivity.phone);
+                    scOrder.setSellerPhone(sellerPhone);
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                    String time = df.format(new Date());
+                    SimpleDateFormat df2 = new SimpleDateFormat("yyyyMMddHHmmss");
+                    String time2 = df2.format(new Date());
+                    String orderId = time2 + BaseActivity.phone + position;
+                    scOrder.setOrderId(orderId);
+                    scOrder.setTime(time);
+                    scOrder.setMoney(total + "");
+                    scOrder.setGoodsId(goodsId);
+                    scOrder.setGoodsCount(goodsCount);
+                    scOrder.setStatus("待发货");
+                    scOrder.setScId(scId);
+                    scList.add(scOrder);
+                    for (int i=0;i<scList.size();i++){
+                        Log.d("onCheckBoxClick", "onCheckBoxClick: " + scList.get(i).toString());
+                    }
+
+                }else {
+                    totalMoney = totalMoney - total;
+                    tvPrice.setText(totalMoney + "元");
+                    for (int i=0;i<scList.size();i++){
+                        if (scList.get(i).getScId() == scId){
+                            scList.remove(i);
+                        }
+                    }
+                    for (int i=0;i<scList.size();i++){
+                        Log.d("onCheckBoxClick", "onCheckBoxClick: " + scList.get(i).toString());
+                    }
+                }
+            }
         });
     }
 
@@ -174,6 +239,16 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
     @Override
     public void deleteFailure() {
         Toast.makeText(getContext(),"删除失败",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void addOrderSuccess() {
+        Toast.makeText(getContext(),"支付成功",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void addOrderFailure() {
+
     }
 
     @Override

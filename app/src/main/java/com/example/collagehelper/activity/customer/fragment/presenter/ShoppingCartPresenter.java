@@ -66,4 +66,16 @@ public class ShoppingCartPresenter {
     public void deleteFailure(){
         view.deleteFailure();
     }
+
+    public void addOrder(String customerPhone,String sellerPhone,String orderId,String time,String money,int goodsId,int goodsCount,String status){
+        manager.addOrder(customerPhone,sellerPhone,orderId,time,money,goodsId,goodsCount,status);
+    }
+
+    public void addOrderSuccess(){
+        view.addOrderSuccess();
+    }
+
+    public void addOrderFailure(){
+        view.addOrderFailure();
+    }
 }

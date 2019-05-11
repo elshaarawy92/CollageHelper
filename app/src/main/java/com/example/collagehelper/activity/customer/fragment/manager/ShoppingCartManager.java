@@ -65,4 +65,19 @@ public class ShoppingCartManager extends BaseManager {
             }
         });
     }
+
+    public void addOrder(String customerPhone,String sellerPhone,String orderId,String time,String money,int goodsId,int goodsCount,String status){
+        Call<ResponseBody> call = orderAsk.addOrder(customerPhone,sellerPhone,orderId,time,money,goodsId,goodsCount,status);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                presenter.addOrderSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                presenter.addOrderFailure();
+            }
+        });
+    }
 }

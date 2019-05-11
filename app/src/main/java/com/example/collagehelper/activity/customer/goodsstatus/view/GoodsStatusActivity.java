@@ -13,6 +13,7 @@ import com.example.collagehelper.activity.customer.goodsdetails.view.GoodsDetail
 import com.example.collagehelper.activity.customer.goodsstatus.presenter.GoodsStatusPresenter;
 import com.example.collagehelper.activity.customer.order.view.IOrderView;
 import com.example.collagehelper.activity.customer.order.view.OrderActivity;
+import com.example.collagehelper.activity.seller.goods.GoodsActivity;
 import com.example.collagehelper.adapter.OrderAdapter;
 import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.bean.GoodsAllInfo;
@@ -55,7 +56,8 @@ public class GoodsStatusActivity extends BaseActivity implements IGoodsStatusVie
     @Override
     public void getSuccess(List<Order> list) {
         if (list.size() == 0){
-            rvStatusOrder.setAdapter(null);
+            adapter = new OrderAdapter(new ArrayList<OrderAdapterBean1>(),new ArrayList<OrderAdapterBean2>(),GoodsStatusActivity.this);
+            rvStatusOrder.setAdapter(adapter);
             return;
         }
         for (int i = 0;i < list.size();i++){
@@ -117,9 +119,9 @@ public class GoodsStatusActivity extends BaseActivity implements IGoodsStatusVie
             @Override
             public void onCommentClick(View view, int position) {
                 presenter.updateByOrderId(orderIdList.get(position),"订单已完成");
-                refresh();
                 Intent intent = new Intent(GoodsStatusActivity.this,CommentActivity.class);
                 intent.putExtra("goods_id",iList.get(position));
+                refresh();
                 startActivity(intent);
             }
         });

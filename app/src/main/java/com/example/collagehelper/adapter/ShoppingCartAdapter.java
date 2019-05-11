@@ -1,12 +1,14 @@
 package com.example.collagehelper.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,6 +45,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public interface OnItemClickListener{
         void onItemClick(View view, int position,int id,int cartId);
         void onItemLongClick(View view, int position,int id,int cartId);
+        void onCheckBoxClick(View view,int position,boolean isChecked,int total,String sellerPhone,int goodsId,int goodsCount,int scID);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -97,10 +100,10 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.goodsName.setText(goodsInfo2.getGoodsName());
         holder.goodsPrice.setText(goodsInfo2.getGoodsPrice());
         holder.goodsAccounts.setText(list2.get(position).getGoodsCount() + "");
-        iAccount = Integer.valueOf(holder.goodsAccounts.getText().toString().trim());
         holder.addGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                iAccount = list2.get(position).getGoodsCount();
                 iAccount++;
                 holder.goodsAccounts.setText(String.valueOf(iAccount));
             }
@@ -108,12 +111,28 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.minusGoods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                iAccount = list2.get(position).getGoodsCount();
                 if (iAccount > 1){
                     iAccount--;
                     holder.goodsAccounts.setText(String.valueOf(iAccount));
                 }
             }
         });
+
+//        holder.cbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked){
+//                    //被选中
+//                    Intent intent = new Intent("android.intent.shoppingcartreciever");
+//                    context.sendBroadcast(intent);
+//                }else {
+//                    //没有被选
+//                    Intent intent = new Intent("android.intent.goodsunselected");
+//                    context.sendBroadcast(intent);
+//                }
+//            }
+//        });
         if (onItemClickListener != null){
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,6 +149,17 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                     id = list2.get(pos).getId();
                     onItemClickListener.onItemLongClick(holder.view,pos,goodsInfo2.getGoodsId(),id);
                     return false;
+                }
+            });
+            holder.cbSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    int pos = holder.getLayoutPosition();
+                    int total = Integer.valueOf(list.get(pos).getGoodsPrice()) * list2.get(pos).getGoodsCount();
+                    String sellerPhone = list.get(pos).getPhone();
+                    int goodsId = list.get(pos).getGoodsId();
+                    int scId = list2.get(pos).getId();
+                    onItemClickListener.onCheckBoxClick(holder.cbSelect,pos,isChecked,total,sellerPhone,goodsId,Integer.valueOf(holder.goodsAccounts.getText().toString()),scId);
                 }
             });
         }
