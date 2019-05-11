@@ -206,10 +206,6 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
                     scOrder.setStatus("待发货");
                     scOrder.setScId(scId);
                     scList.add(scOrder);
-                    for (int i=0;i<scList.size();i++){
-                        Log.d("onCheckBoxClick", "onCheckBoxClick: " + scList.get(i).toString());
-                    }
-
                 }else {
                     totalMoney = totalMoney - total;
                     tvPrice.setText(totalMoney + "元");
@@ -217,9 +213,6 @@ public class ShoppingCartFragment extends BaseFragment implements IShoppingCartV
                         if (scList.get(i).getScId() == scId){
                             scList.remove(i);
                         }
-                    }
-                    for (int i=0;i<scList.size();i++){
-                        Log.d("onCheckBoxClick", "onCheckBoxClick: " + scList.get(i).toString());
                     }
                 }
             }
