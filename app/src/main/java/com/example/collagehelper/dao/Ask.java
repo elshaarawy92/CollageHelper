@@ -12,6 +12,7 @@ import com.example.collagehelper.bean.GoodsInfoFromServer;
 import com.example.collagehelper.bean.Order;
 import com.example.collagehelper.bean.ShoppingCart;
 import com.example.collagehelper.bean.User;
+import com.example.collagehelper.bean.UserDO;
 
 import java.util.List;
 
@@ -34,6 +35,12 @@ public interface Ask {
 
     @GET("get")
     Call<User> getUser(@Query("phone")String phone);
+
+    @GET("face")
+    Call<ResponseBody> insertFace(@Query("phone")String phone,@Query("face")String face);
+
+    @GET("sbpf")
+    Call<UserDO> selectByPhoneAndFace(@Query("phone")String phone,@Query("face")String face);
 
     @POST("add_goods")
     @Multipart

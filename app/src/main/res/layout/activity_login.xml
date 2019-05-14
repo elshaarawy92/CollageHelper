@@ -110,6 +110,16 @@
         android:textColor="#FFFFFF"
         android:textSize="18sp"/>
 
+    <Button
+        android:id="@+id/btn_face_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/login_button_type"
+        android:text="人   脸   登   录"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

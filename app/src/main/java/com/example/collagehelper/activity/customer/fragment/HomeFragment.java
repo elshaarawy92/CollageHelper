@@ -31,6 +31,13 @@ import com.example.collagehelper.bean.CTSDO;
 import com.example.collagehelper.bean.CollectedSeller;
 import com.example.collagehelper.bean.User;
 import com.example.collagehelper.base.BaseFragment;
+import com.google.gson.Gson;
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechUtility;
+import com.iflytek.cloud.ui.RecognizerDialog;
+import com.iflytek.cloud.ui.RecognizerDialogListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +54,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     private int previousSelectedPosition = 0;
     boolean isRunning = false;
     private RecyclerView recyclerView;
+    private ImageView ivVoice;
 
     private CollectedSellerAdapter adapter;
     private LinearLayoutManager manager;
@@ -56,11 +64,13 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     private List<CollectedSeller> list = new ArrayList<>();
     private List<CollectedSeller> list1 = new ArrayList<>();
-
+    private List<String> phoneList = new ArrayList<>();
+    private int i = 0;
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
+        SpeechUtility.createUtility(getContext(),SpeechConstant.APPID + "=5cd8fd5e");
         presenter = new Main2Presenter(this);
         initView(view);
         presenter.getCollectedSeller(BaseActivity.phone);
@@ -89,6 +99,12 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             }
             ;
         }.start();
+        ivVoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initSpeech(getContext());
+            }
+        });
         etSearchGoods.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -121,10 +137,13 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     private void refresh(){
         list.clear();
+        phoneList.clear();
+        i = 0;
         presenter.getCollectedSeller(BaseActivity.phone);
     }
 
     private void initView(View view){
+        ivVoice = view.findViewById(R.id.iv_voice);
         etSearchGoods = view.findViewById(R.id.et_search_goods);
         viewPager = view.findViewById(R.id.viewpager);
         ll_point_container = view.findViewById(R.id.ll_point_container);
@@ -210,13 +229,15 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     public void getCollectedSellerSuccess(CTSDO ctsdo) {
-        List<String> list = new ArrayList<>();
         for (int i = 0;i < ctsdo.getData().size();i++){
-            list.add(ctsdo.getData().get(i).getSellerPhone());
+            phoneList.add(ctsdo.getData().get(i).getSellerPhone());
         }
-        for (int j = 0; j < list.size(); j++){
-            presenter.getSellerByPhone(list.get(j));
-        }
+        getSeller(phoneList);
+    }
+
+    private void getSeller(List<String> list){
+        presenter.getSellerByPhone(list.get(i));
+        i++;
     }
 
     @Override
@@ -235,6 +256,10 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
         collectedSeller.setHead(user.getData().getHead());
         collectedSeller.setName(user.getData().getName());
         list.add(collectedSeller);
+        if (i < phoneList.size()){
+            getSeller(phoneList);
+            return;
+        }
         list1.clear();
         list1.addAll(list);
         adapter = new CollectedSellerAdapter(list1,getContext());
@@ -245,7 +270,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getContext(),SellerDetailsActivity.class);
-                intent.putExtra("sellerphone",user.getData().getPhone());
+                intent.putExtra("sellerphone",phoneList.get(position));
                 startActivity(intent);
             }
 
@@ -300,5 +325,71 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
     public void onDestroyView() {
         super.onDestroyView();
         list.clear();
+        phoneList.clear();
+        i = 0;
+    }
+
+    /**
+     * 初始化语音识别
+     */
+    public void initSpeech(final Context context) {
+        //1.创建RecognizerDialog对象
+        RecognizerDialog mDialog = new RecognizerDialog(context, null);
+        //2.设置accent、language等参数
+        mDialog.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
+        mDialog.setParameter(SpeechConstant.ACCENT, "mandarin");
+        //3.设置回调接口
+        mDialog.setListener(new RecognizerDialogListener() {
+            @Override
+            public void onResult(RecognizerResult recognizerResult, boolean isLast) {
+                if (!isLast) {
+                    //解析语音
+                    //返回的result为识别后的汉字,直接赋值到TextView上即可
+                    String result = parseVoice(recognizerResult.getResultString());
+                    etSearchGoods.setText(null);
+                    etSearchGoods.setText(result);
+                }
+            }
+
+            @Override
+            public void onError(SpeechError speechError) {
+
+            }
+        });
+        //4.显示dialog，接收语音输入
+        mDialog.show();
+    }
+
+    /**
+     * 解析语音json
+     */
+    public String parseVoice(String resultString) {
+        Gson gson = new Gson();
+        Voice voiceBean = gson.fromJson(resultString, Voice.class);
+
+        StringBuffer sb = new StringBuffer();
+        ArrayList<Voice.WSBean> ws = voiceBean.ws;
+        for (Voice.WSBean wsBean : ws) {
+            String word = wsBean.cw.get(0).w;
+            sb.append(word);
+        }
+        return sb.toString();
+    }
+
+
+    /**
+     * 语音对象封装
+     */
+    public class Voice {
+
+        public ArrayList<WSBean> ws;
+
+        public class WSBean {
+            public ArrayList<CWBean> cw;
+        }
+
+        public class CWBean {
+            public String w;
+        }
     }
 }

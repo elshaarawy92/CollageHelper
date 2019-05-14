@@ -19,6 +19,7 @@ import com.example.collagehelper.activity.login.presenter.LoginPresenter;
 import com.example.collagehelper.activity.seller.main.view.MainActivity;
 import com.example.collagehelper.activity.regist.view.RegistActivity;
 import com.example.collagehelper.base.BaseActivity;
+import com.example.collagehelper.face.RegisterAndRecognizeActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,6 +32,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     private EditText etPhone;
     private EditText etPassword;
     private Button btnLogin;
+    private Button btnFaceLogin;
     private TextView tvForget;
     private TextView tvRegist;
     private RadioButton rbCustomer;
@@ -55,6 +57,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         etPhone = findViewById(R.id.et_phone);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
+        btnFaceLogin = findViewById(R.id.btn_face_login);
         tvForget = findViewById(R.id.tv_forget);
         tvRegist = findViewById(R.id.tv_regist);
         civLoginHead.setImageResource(R.drawable.logo);
@@ -98,6 +101,18 @@ public class LoginActivity extends BaseActivity implements ILoginView {
                     etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
                 etPassword.setSelection(etPassword.length());
+            }
+        });
+        proxyOnClickListener(2, btnFaceLogin, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (etPhone.getText().toString().trim().equals("")){
+                    Toast.makeText(LoginActivity.this,"手机号不能为空",Toast.LENGTH_SHORT).show();
+                }else {
+                    Intent intent = new Intent(LoginActivity.this,RegisterAndRecognizeActivity.class);
+                    intent.putExtra("phone",etPhone.getText().toString().trim());
+                    startActivity(intent);
+                }
             }
         });
     }

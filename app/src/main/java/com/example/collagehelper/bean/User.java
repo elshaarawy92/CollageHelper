@@ -26,6 +26,7 @@ public class User {
         private String password;
         private String type;
         private String head;
+        private String face;
 
         public String getPhone() {
             return phone;
@@ -65,6 +66,14 @@ public class User {
 
         public void setHead(String head) {
             this.head = head;
+        }
+
+        public String getFace() {
+            return face;
+        }
+
+        public void setFace(String face) {
+            this.face = face;
         }
 
         @Override
