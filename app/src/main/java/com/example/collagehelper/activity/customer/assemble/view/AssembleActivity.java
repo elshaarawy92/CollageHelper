@@ -59,6 +59,9 @@ public class AssembleActivity extends BaseActivity implements IAssembleView {
         if (list == null){
             return;
         }
+        if (list.size() == 0){
+            return;
+        }
         for (int i = 0; i < list.size(); i++){
             assembleIdList.add(list.get(i).getAssembleId());
             statusList.add(list.get(i).getStatus());

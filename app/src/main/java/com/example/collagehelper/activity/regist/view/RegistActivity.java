@@ -94,7 +94,6 @@ public class RegistActivity extends BaseActivity implements IRegistView{
     private String pwdConfirm;
     private String username;
     private String code;
-    private String status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

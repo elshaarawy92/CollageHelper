@@ -62,6 +62,12 @@
             android:id="@+id/iv_minus"
             android:background="@drawable/minus"/>
     </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="请输入您的地址"/>
     <Button
         android:id="@+id/btn_add_to_cart"
         android:layout_width="match_parent"

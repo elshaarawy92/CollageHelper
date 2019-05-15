@@ -51,7 +51,7 @@ public class GoodsDetailsActivity extends BaseActivity implements IUpdateGoodsVi
                 .signature(new ObjectKey(updateTime))
                 .into(ivImg);
         tvName.setText(goodsAllInfo.getData().getGoodsName());
-        tvPrice.setText(goodsAllInfo.getData().getGoodsPrice() + " 元/斤");
+        tvPrice.setText(goodsAllInfo.getData().getGoodsPrice() + " 元");
         tvDes.setText(goodsAllInfo.getData().getGoodsDes());
     }
 

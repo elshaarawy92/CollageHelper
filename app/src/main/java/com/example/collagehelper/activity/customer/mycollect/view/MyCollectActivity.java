@@ -45,6 +45,12 @@ public class MyCollectActivity extends BaseActivity implements IMyCollectView{
 
     @Override
     public void getCgSuccess(List<CGDO> list) {
+        if (list == null){
+            return;
+        }
+        if (list.size() == 0){
+            return;
+        }
         cgList = list;
         for (int i = 0; i < list.size(); i++){
             goodsIdList.add(list.get(i).getGoodsId());

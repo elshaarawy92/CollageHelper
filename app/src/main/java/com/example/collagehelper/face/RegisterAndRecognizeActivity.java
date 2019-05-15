@@ -9,20 +9,27 @@ import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -33,14 +40,17 @@ import com.arcsoft.face.FaceFeature;
 import com.arcsoft.face.GenderInfo;
 import com.arcsoft.face.LivenessInfo;
 import com.arcsoft.face.VersionInfo;
+import com.example.collagehelper.MyClickListener;
 import com.example.collagehelper.R;
 import com.example.collagehelper.activity.customer.main.view.Main2Activity;
+import com.example.collagehelper.activity.regist.view.RegistActivity;
 import com.example.collagehelper.activity.seller.main.view.MainActivity;
 import com.example.collagehelper.base.BaseActivity;
 import com.example.collagehelper.bean.User;
 import com.example.collagehelper.bean.UserDO;
 import com.example.collagehelper.face.presenter.RARAPresenter;
 import com.example.collagehelper.face.view.IRARAView;
+import com.mob.MobSDK;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +58,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -119,6 +131,10 @@ public class RegisterAndRecognizeActivity extends BaseActivity implements ViewTr
     private RARAPresenter presenter;
     private boolean exist;
     private boolean faceExist;
+
+    private EventHandler eventHandler;
+    private Handler handler;
+    private String code;
     /**
      * 所需的所有权限信息
      */
@@ -133,7 +149,7 @@ public class RegisterAndRecognizeActivity extends BaseActivity implements ViewTr
         setContentView(R.layout.activity_register_and_recognize);
         hideActionBar();
         setTittle("人脸登录");
-
+        MobSDK.init(this);
         Intent intent = getIntent();
         phone = intent.getStringExtra("phone");
         presenter = new RARAPresenter(this);
@@ -627,6 +643,68 @@ public class RegisterAndRecognizeActivity extends BaseActivity implements ViewTr
         presenter.getUser(phone);
 
     }
+
+    private void sendMessageCode(){
+        eventHandler = new EventHandler() {
+            public void afterEvent(int event, int result, Object data) {
+                Message msg = new Message();
+                msg.arg1 = event;
+                msg.arg2 = result;
+                msg.obj = data;
+                new Handler(Looper.getMainLooper(), new Handler.Callback() {
+                    @Override
+                    public boolean handleMessage(Message msg) {
+                        int event = msg.arg1;
+                        int result = msg.arg2;
+                        if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                            if (result == SMSSDK.RESULT_COMPLETE) {
+                                Toast.makeText(RegisterAndRecognizeActivity.this,"发送验证码成功",Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegisterAndRecognizeActivity.this,"发送验证码失败",Toast.LENGTH_SHORT).show();
+                            }
+                        } else if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                            if (result == SMSSDK.RESULT_COMPLETE) {
+                                Message message = Message.obtain();
+                                message.what = 1;
+                                handler.sendMessage(message);
+                            } else {
+                                Toast.makeText(RegisterAndRecognizeActivity.this,"验证码错误",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        return false;
+                    }
+                }).sendMessage(msg);
+            }
+        };
+        SMSSDK.registerEventHandler(eventHandler);
+        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterAndRecognizeActivity.this);
+        View view = LayoutInflater.from(RegisterAndRecognizeActivity.this).inflate(R.layout.item_send_code,null,false);
+        builder.setView(view);
+        builder.show();
+        Button btnSendCode = view.findViewById(R.id.btn_send_code);
+        final EditText etCode = view.findViewById(R.id.et_code);
+        proxyOnClickListener(2, btnSendCode, new MyClickListener() {
+            @Override
+            public void onClick(View view) {
+                code = etCode.getText().toString().trim();
+                if (code == null){
+                    Toast.makeText(RegisterAndRecognizeActivity.this,"验证码错误",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                SMSSDK.submitVerificationCode("86",phone,code);
+                handler = new Handler(){
+                    @Override
+                    public void handleMessage(Message msg) {
+                        if (msg.what == 1){
+                            if (registerStatus == REGISTER_STATUS_DONE) {
+                                registerStatus = REGISTER_STATUS_READY;
+                            }
+                        }
+                    }
+                };
+            }
+        });
+    }
     /**
      * 在{@link #previewView}第一次布局完成后，去除该监听，并且进行引擎和相机的初始化
      */
@@ -672,6 +750,7 @@ public class RegisterAndRecognizeActivity extends BaseActivity implements ViewTr
         }
         if (exist){
             if (!faceExist){
+//                sendMessageCode();
                 if (registerStatus == REGISTER_STATUS_DONE) {
                     registerStatus = REGISTER_STATUS_READY;
                 }

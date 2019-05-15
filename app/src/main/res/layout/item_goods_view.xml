@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="16sp"
                         android:textColor="#F000"
-                        android:text="元/斤"/>
+                        android:text="元"/>
                 </LinearLayout>
 
             </LinearLayout>
